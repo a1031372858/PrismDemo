@@ -101,18 +101,26 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegionAdapter\StackPanelRegionAdapter.cs" />
     <Compile Include="Utility\SQLUtility.cs" />
+    <Compile Include="Views\MessageView.xaml.cs">
+      <DependentUpon>MessageView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />
-    <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\icon.jpg" />
     <Content Include="Images\mate10.jpg" />
     <Content Include="Images\systemIcon.JPG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\MessageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
