@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reactive.Disposables;
 using System.Reflection;
 using System.Windows;
 using Common.Constants;
@@ -27,6 +28,8 @@ namespace Common.Bases
         public IEventAggregator EventAggregator { get; }
 
         public IContainerProvider Container { get; }
+
+        protected CompositeDisposable Disposable { get; } = new CompositeDisposable();
 
         protected ViewModelBase()
         {
