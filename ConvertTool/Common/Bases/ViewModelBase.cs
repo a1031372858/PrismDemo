@@ -12,18 +12,22 @@ using Microsoft.Practices.Unity;
 using Prism.Events;
 using Prism.Ioc;
 using Prism.Mvvm;
+using Prism.Services.Dialogs;
 
 namespace Common.Bases
 {
-    public class ViewModelBase : BindableBase, INotifyDataErrorInfo
+    public class ViewModelBase : BindableBase, INotifyDataErrorInfo,IDialogAware
     {
         private string _title;
+
 
         public string Title
         {
             set => SetProperty(ref _title, value);
             get => _title;
         }
+
+        public event Action<IDialogResult> RequestClose;
 
         public IEventAggregator EventAggregator { get; }
 
@@ -65,7 +69,10 @@ namespace Common.Bases
 
         protected virtual void RegisterCommands() {}
 
-        protected virtual void Init() {}
+        protected virtual void Init()
+        {
+
+        }
 
 
 
@@ -94,5 +101,20 @@ namespace Common.Bases
 
         public bool HasErrors { get; }
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+
+        public bool CanCloseDialog()
+        {
+            return true;
+        }
+
+        public void OnDialogClosed()
+        {
+
+        }
+
+        public void OnDialogOpened(IDialogParameters parameters)
+        {
+
+        }
     }
 }

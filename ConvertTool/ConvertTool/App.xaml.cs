@@ -33,7 +33,7 @@ namespace ConvertTool
         {
             var container = new UnityContainer();
             container.RegisterInstance<IEventAggregator>(new EventAggregator());
-            container.RegisterInstance(Container);
+            container.RegisterInstance<IContainerProvider>(Container);
             var provider = new UnityServiceLocator(container);
             ServiceLocator.SetLocatorProvider(() => provider);
             return Container.Resolve<LoginMainView>();

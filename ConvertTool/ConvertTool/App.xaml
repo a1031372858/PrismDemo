@@ -6,6 +6,6 @@
     xmlns:unity="http://prismlibrary.com/">
     <Application.Resources>
         <!-- <ImageBrush x:Key="SystemIcon" ImageSource="pack://application:,,,/Common;component/Images/icon.jpg" /> -->
-
+        <ResourceDictionary Source="pack://application:,,,/Common;component/Style/CommonStyle.xaml" />
     </Application.Resources>
 </unity:PrismApplication>

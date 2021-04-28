@@ -50,6 +50,7 @@
             Width="200"
             Height="30"
             VerticalContentAlignment="Center"
+            KeyDown="UIElement_OnKeyDown"
             Text="{Binding Account}" />
         <Label
             Grid.Row="3"
@@ -58,6 +59,7 @@
             Content="密码："
             FontWeight="Bold" />
         <TextBox
+            x:Name="PasswordTextBox"
             Grid.Row="4"
             Grid.Column="0"
             Width="200"

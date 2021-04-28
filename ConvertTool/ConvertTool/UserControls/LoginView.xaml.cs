@@ -24,5 +24,14 @@ namespace ConvertTool.UserControls
         {
             InitializeComponent();
         }
+
+        private void UIElement_OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                PasswordTextBox.Focus();
+                e.Handled = true;
+            }
+        }
     }
 }

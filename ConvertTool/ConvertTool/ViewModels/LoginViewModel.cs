@@ -1,12 +1,12 @@
-﻿using Common.Bases;
-using Common.Views;
-using Prism.Commands;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Linq;
 using System.Windows;
-using Common.Utility;
+using Common.Bases;
+using Common.Views;
 using ConvertTool.Views;
+using Prism.Commands;
 using Prism.Ioc;
+using SqlData;
 
 namespace ConvertTool.ViewModels
 {
@@ -80,20 +80,29 @@ namespace ConvertTool.ViewModels
         {
             if (!string.IsNullOrEmpty(Account) && !string.IsNullOrEmpty(Password))
             {
-                string sql = string.Format("select * from \"user\" where phone= '{0}' and \"password\"='{1}'", Account, Password);
-
-                var result=SQLUtility.SqlExecute(sql);
-                if (result!=null&&result.HasRows&& result.Read())
+                using (var context = new PostgreSqlContext())
                 {
-                    var name = result["username"];
-                    var id =result.GetData(1);
+                    var userList = context.UserDetail.ToList();
+                    if (userList.Any(o => o.Phone == Account && o.UserPassword == Password))
+                    {
+
+                        new ToolView().Show();
+                    }
                 }
+
+                // string sql = string.Format("select * from \"user\" where phone= '{0}' and \"password\"='{1}'", Account, Password);
+
+                // var result=SQLUtility.SqlExecute(sql);
+                // if (result!=null&&result.HasRows&& result.Read())
+                // {
+                //     var name = result["username"];
+                //     var id =result.GetData(1);
+                // }
                 // var loginView = Container.Resolve(typeof(ToolView));
                 // if (loginView is ToolView view)
                 // {
                 //     view.Close();
                 // }
-                new ToolView().Show();
             }
         }
     }
