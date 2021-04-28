@@ -1,10 +1,12 @@
-﻿using System.ComponentModel;
+﻿using Common.Bases;
+using Common.Views;
+using Prism.Commands;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
-using Common.Bases;
 using Common.Utility;
 using ConvertTool.Views;
-using Prism.Commands;
+using Prism.Ioc;
 
 namespace ConvertTool.ViewModels
 {
@@ -63,7 +65,10 @@ namespace ConvertTool.ViewModels
         private void LoginViewModel_ErrorsChanged(object sender, DataErrorsChangedEventArgs e)
         {
             var msg = ErrorsContainer.GetErrors(e.PropertyName).FirstOrDefault();
-            MessageBox.Show(msg);
+            // MessageBox.Show(msg);
+            var view = Container.Resolve<MessageView>();
+           
+            var result=view.ShowDialog();
         }
 
         private void Register()

@@ -19,14 +19,23 @@ namespace Common.Views
     /// </summary>
     public partial class MessageView : Window
     {
+
         public MessageView()
         {
             InitializeComponent();
         }
 
+        private void MessageView_OnMouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                this.DragMove();
+            }
+        }
+
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
     }
 }

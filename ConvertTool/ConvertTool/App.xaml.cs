@@ -5,6 +5,8 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using Common.RegionAdapter;
+using Common.ViewModels;
+using Common.Views;
 using ConvertTool.Views;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
