@@ -5,6 +5,7 @@ using Common.Bases;
 using Common.Utility;
 using Common.Views;
 using ConvertTool.Views;
+using Games.Views;
 using Prism.Commands;
 using Prism.Ioc;
 using SqlData;
@@ -86,7 +87,7 @@ namespace ConvertTool.ViewModels
                 var userList = context.UserDetail.ToList();
                 if (userList.Any(o => o.Phone == Account && o.UserPassword == Password))
                 {
-                    Container.Resolve<ToolView>().Show();
+                    Container.Resolve<SnakeView>().Show();
                     Container.Resolve<LoginMainView>().Close();
                 }
                 

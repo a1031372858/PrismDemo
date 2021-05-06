@@ -11,7 +11,8 @@ namespace SqlData
             optionsBuilder.UseNpgsql(@"PORT=5432;DATABASE=usermanager;HOST=localhost;PASSWORD=666666;USER ID=postgres;");
         }
 
-        
         public DbSet<UserDetail> UserDetail { set; get; }
+
+        public DbSet<Rank> Rank { set; get; }
     }
 }

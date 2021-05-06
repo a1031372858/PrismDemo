@@ -137,6 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bases\BeanBase.cs" />
+    <Compile Include="Beans\Rank.cs" />
     <Compile Include="Beans\UserDetail.cs" />
     <Compile Include="PostgreSqlContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

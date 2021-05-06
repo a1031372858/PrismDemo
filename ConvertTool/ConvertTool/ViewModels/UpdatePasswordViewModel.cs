@@ -7,11 +7,13 @@ using Common.Views;
 using Prism.Commands;
 using Prism.Ioc;
 using SqlData;
+using SqlData.Beans;
 
 namespace ConvertTool.ViewModels
 {
     public class UpdatePasswordViewModel:ViewModelBase
     {
+        private UserDetail _user;
 
         private string _phone = string.Empty;
         public string Phone
@@ -36,7 +38,24 @@ namespace ConvertTool.ViewModels
             get => _checkVisibility;
         }
 
+
+        private string _password = string.Empty;
+        public string Password
+        {
+            set => SetProperty(ref _password, value);
+            get => _password;
+        }
+
+        private string _checkPassword = string.Empty;
+        public string CheckPassword
+        {
+            set => SetProperty(ref _checkPassword, value);
+            get => _checkPassword;
+        }
+
         public DelegateCommand CheckCommand { set; get; }
+
+        public DelegateCommand UpdatePsdCommand { set; get; }
 
         protected override void Init()
         {
@@ -46,6 +65,23 @@ namespace ConvertTool.ViewModels
         protected override void RegisterCommands()
         {
             CheckCommand = new DelegateCommand(Check);
+            UpdatePsdCommand = new DelegateCommand(UpdatePasswrod);
+        }
+
+        private void UpdatePasswrod()
+        {
+            if (Password != CheckPassword || string.IsNullOrEmpty(Password))
+            {
+                MessageUtility.ShowMessage("两次密码不一致！");
+                return;
+            }
+
+            var dataContext = Container.Resolve<PostgreSqlContext>();
+            if (_user != null)
+            {
+                _user.UserPassword = Password;
+                dataContext.SaveChanges();
+            }
         }
 
         private void Check()
@@ -53,12 +89,12 @@ namespace ConvertTool.ViewModels
 
             var context = Container.Resolve<PostgreSqlContext>();
 
-            var userList = context.UserDetail.ToList();
-            if (userList.Any(o => o.Phone == Phone))
+            if (context.UserDetail.Any(o => o.Phone == Phone))
             {
                 if (_checkCode == InputCode)
                 {
-
+                    _user = context.UserDetail.FirstOrDefault(o => o.Phone == Phone);
+                    CheckVisibility = Visibility.Collapsed;
                 }
                 else
                 {

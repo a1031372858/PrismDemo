@@ -1,0 +1,41 @@
+﻿<Window
+    x:Class="Games.Views.SnakeView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Games.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mvvm="http://prismlibrary.com/"
+    Title="贪吃蛇"
+    Width="800"
+    Height="450"
+    mvvm:ViewModelLocator.AutoWireViewModel="True"
+    Loaded="SnakeView_OnLoaded"
+    mc:Ignorable="d">
+    <Grid Name="GameGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="10" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="10" />
+        </Grid.RowDefinitions>
+    </Grid>
+</Window>
