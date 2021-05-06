@@ -16,6 +16,7 @@ using Prism.Modularity;
 using Prism.Mvvm;
 using Prism.Regions;
 using Prism.Unity;
+using SqlData;
 
 namespace ConvertTool
 {
@@ -27,6 +28,7 @@ namespace ConvertTool
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<LoginMainView>();
+            containerRegistry.RegisterSingleton<PostgreSqlContext>();
         }
 
         protected override Window CreateShell()

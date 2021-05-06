@@ -80,15 +80,14 @@ namespace ConvertTool.ViewModels
         {
             if (!string.IsNullOrEmpty(Account) && !string.IsNullOrEmpty(Password))
             {
-                using (var context = new PostgreSqlContext())
+                var context = Container.Resolve<PostgreSqlContext>();
+                var userList = context.UserDetail.ToList();
+                if (userList.Any(o => o.Phone == Account && o.UserPassword == Password))
                 {
-                    var userList = context.UserDetail.ToList();
-                    if (userList.Any(o => o.Phone == Account && o.UserPassword == Password))
-                    {
-
-                        new ToolView().Show();
-                    }
+                    Container.Resolve<ToolView>().Show();
+                    Container.Resolve<LoginMainView>().Close();
                 }
+                
 
                 // string sql = string.Format("select * from \"user\" where phone= '{0}' and \"password\"='{1}'", Account, Password);
 
