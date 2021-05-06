@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ConvertTool.ViewModels;
 
 namespace ConvertTool.Views
 {
@@ -22,6 +23,29 @@ namespace ConvertTool.Views
         public LoginMainView()
         {
             InitializeComponent();
+        }
+
+        private void PhoneTextBox_OnKeyDown(object sender, KeyEventArgs e)
+        {
+
+            if (e.Key == Key.Enter)
+            {
+                // PasswordTextBox.Focus();
+                e.Handled = true;
+            }
+        }
+
+        private void PasswordTextBox_OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                // LoginButton.Focus();
+                if (DataContext is LoginViewModel vm && vm.LoginCommand.CanExecute())
+                {
+                    vm.LoginCommand.Execute();
+                }
+                e.Handled = true;
+            }
         }
     }
 }

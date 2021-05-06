@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows;
 using Common.Bases;
+using Common.Enums;
 using Common.Utility;
 using Common.Views;
 using ConvertTool.Views;
@@ -77,6 +78,7 @@ namespace ConvertTool.ViewModels
         private void Register()
         {
             ParentViewModel.DisplayLogin = Visibility.Collapsed;
+            ParentViewModel.ViewMode = Constants.LoginViewMode.Register;
         }
 
         private void Login()

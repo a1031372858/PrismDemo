@@ -196,6 +196,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ConvertToolModule.cs" />
+    <Compile Include="Selectors\LoginViewSelector.cs" />
     <Compile Include="UserControls\HeaderView.xaml.cs">
       <DependentUpon>HeaderView.xaml</DependentUpon>
     </Compile>
@@ -290,6 +291,7 @@
       <Name>SqlData</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
