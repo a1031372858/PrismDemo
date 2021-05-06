@@ -21,6 +21,7 @@
             <RowDefinition Height="30" />
             <RowDefinition Height="30" />
             <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200" />
@@ -82,5 +83,13 @@
             Margin="10,0,0,0"
             Command="{Binding LoginCommand}"
             Content="登録" />
+        <Button
+            Grid.Row="5"
+            Grid.Column="1"
+            Width="80"
+            Height="30"
+            Margin="10,0,0,0"
+            Command="{Binding UpdatePasswordCommand}"
+            Content="忘了密码？" />
     </Grid>
 </UserControl>

@@ -103,6 +103,7 @@
     <Compile Include="Events\MessageEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegionAdapter\StackPanelRegionAdapter.cs" />
+    <Compile Include="Utility\MessageUtility.cs" />
     <Compile Include="Utility\SQLUtility.cs" />
     <Compile Include="ViewModels\MessageViewModel.cs" />
     <Compile Include="Views\MessageView.xaml.cs">
@@ -112,9 +113,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Style\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\icon.jpg" />
     <Content Include="Images\mate10.jpg" />

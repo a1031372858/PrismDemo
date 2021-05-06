@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows;
 using Common.Bases;
+using Common.Utility;
 using Common.Views;
 using ConvertTool.Views;
 using Prism.Commands;
@@ -12,7 +13,7 @@ namespace ConvertTool.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
-        private LoginMainViewModel ParentViewModel;
+        public LoginMainViewModel ParentViewModel;
 
         public LoginViewModel() { }
 
@@ -49,12 +50,16 @@ namespace ConvertTool.ViewModels
         public DelegateCommand LoginCommand { set; get; }
 
         public DelegateCommand RegisterCommand { set; get; }
+
+        public DelegateCommand UpdatePasswordCommand { set; get; }
         protected override void RegisterCommands()
         {
             base.RegisterCommands();
             LoginCommand = new DelegateCommand(Login);
             RegisterCommand = new DelegateCommand(Register);
+            UpdatePasswordCommand = new DelegateCommand(UpdatePassword);
         }
+
 
         protected override void RegisterEvents()
         {
@@ -64,11 +69,8 @@ namespace ConvertTool.ViewModels
 
         private void LoginViewModel_ErrorsChanged(object sender, DataErrorsChangedEventArgs e)
         {
-            var msg = ErrorsContainer.GetErrors(e.PropertyName).FirstOrDefault();
-            // MessageBox.Show(msg);
-            var view = Container.Resolve<MessageView>();
-           
-            var result=view.ShowDialog();
+            var msg = ErrorsContainer.GetErrors(e.PropertyName).FirstOrDefault(); 
+            MessageUtility.ShowMessage(msg);
         }
 
         private void Register()
@@ -103,6 +105,11 @@ namespace ConvertTool.ViewModels
                 //     view.Close();
                 // }
             }
+        }
+        private void UpdatePassword()
+        {
+
+            Container.Resolve<UpdatePasswordView>().ShowDialog();
         }
     }
 }

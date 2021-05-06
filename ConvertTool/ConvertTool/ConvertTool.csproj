@@ -210,6 +210,7 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModel.cs" />
+    <Compile Include="ViewModels\UpdatePasswordViewModel.cs" />
     <Compile Include="Views\LoginMainView.xaml.cs">
       <DependentUpon>LoginMainView.xaml</DependentUpon>
     </Compile>
@@ -219,6 +220,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\UpdatePasswordView.xaml.cs">
+      <DependentUpon>UpdatePasswordView.xaml</DependentUpon>
     </Compile>
     <Page Include="UserControls\HeaderView.xaml">
       <SubType>Designer</SubType>
@@ -237,6 +241,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ToolView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UpdatePasswordView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

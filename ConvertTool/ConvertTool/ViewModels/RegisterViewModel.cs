@@ -3,6 +3,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Windows;
 using Common.Bases;
+using Common.Utility;
 using Common.ViewModels;
 using Common.Views;
 using Microsoft.EntityFrameworkCore.Internal;
@@ -38,7 +39,7 @@ namespace ConvertTool.ViewModels
             get => _checkPassword;
         }
 
-        private LoginMainViewModel ParentViewModel;
+        public LoginMainViewModel ParentViewModel;
         public RegisterViewModel() { }
 
         public DelegateCommand CancelCommand { set; get; }
@@ -72,13 +73,7 @@ namespace ConvertTool.ViewModels
             var userList = context.UserDetail.ToList();
             if (userList.Any(o => o.Phone == Phone))
             {
-                var view =Container.Resolve<MessageView>();
-                if (view.DataContext is MessageViewModel vm)
-                {
-                    vm.Message = "该手机号已注册！";
-                    view.ShowDialog();
-                }
-                // Console.WriteLine("该手机号已注册！");
+                MessageUtility.ShowMessage("该手机号已注册！");
                 return;
             }
 
