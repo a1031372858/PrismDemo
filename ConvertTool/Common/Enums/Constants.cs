@@ -6,10 +6,12 @@ namespace Common.Enums
     {
         public enum LoginViewMode
         {
-            [Code("1")]
+            [Code("0")]
             Login=0,
-            Register=1,
-            UpdatePsw=2,
+            [Code("1")]
+            Register =1,
+            [Code("2")]
+            UpdatePsw =2,
         }
     }
 }

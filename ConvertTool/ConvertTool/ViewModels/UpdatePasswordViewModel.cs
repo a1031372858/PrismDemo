@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Windows;
 using Common.Bases;
+using Common.Enums;
 using Common.Utility;
 using Common.ViewModels;
 using Common.Views;
@@ -13,6 +14,15 @@ namespace ConvertTool.ViewModels
 {
     public class UpdatePasswordViewModel:ViewModelBase
     {
+        public UpdatePasswordViewModel() { }
+
+        public UpdatePasswordViewModel(LoginMainViewModel parentViewModel)
+        {
+            ParentViewModel = parentViewModel;
+        }
+
+        public LoginMainViewModel ParentViewModel;
+
         private UserDetail _user;
 
         private string _phone = string.Empty;
@@ -81,6 +91,7 @@ namespace ConvertTool.ViewModels
             {
                 _user.UserPassword = Password;
                 dataContext.SaveChanges();
+                ParentViewModel.ViewMode = Constants.LoginViewMode.Login;
             }
         }
 

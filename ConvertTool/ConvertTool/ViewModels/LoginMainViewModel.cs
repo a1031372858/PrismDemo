@@ -31,12 +31,20 @@ namespace ConvertTool.ViewModels
             get => _registerViewModel;
         }
 
+        private UpdatePasswordViewModel _updatePswViewModel;
+        public UpdatePasswordViewModel UpdatePswViewModel
+        {
+            set => SetProperty(ref _updatePswViewModel, value);
+            get => _updatePswViewModel;
+        }
+
 
         protected override void RegisterProperties()
         {
             base.RegisterProperties();
             LoginViewModel = new LoginViewModel(this);
             RegisterViewModel = new RegisterViewModel(this);
+            UpdatePswViewModel = new UpdatePasswordViewModel(this);
         }
 
         protected override void Init()

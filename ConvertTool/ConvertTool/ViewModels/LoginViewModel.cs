@@ -111,8 +111,7 @@ namespace ConvertTool.ViewModels
         }
         private void UpdatePassword()
         {
-
-            Container.Resolve<UpdatePasswordView>().ShowDialog();
+            ParentViewModel.ViewMode = Constants.LoginViewMode.UpdatePsw;
         }
     }
 }

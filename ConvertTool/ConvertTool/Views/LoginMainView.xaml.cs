@@ -20,7 +20,7 @@ namespace ConvertTool.Views
     /// </summary>
     public partial class LoginMainView : Window
     {
-        private object temp;
+
         public LoginMainView()
         {
             InitializeComponent();
@@ -49,21 +49,5 @@ namespace ConvertTool.Views
             }
         }
 
-        private void LoginMainView_OnKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                if (Control.Content != null)
-                {
-                    temp = Control.Content;
-                    DataContext = null;
-                }
-                else
-                {
-                    DataContext = temp;
-                }
-                e.Handled = true;
-            }
-        }
     }
 }
