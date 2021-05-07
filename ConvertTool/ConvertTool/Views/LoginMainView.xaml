@@ -13,6 +13,7 @@
     Width="500"
     Height="600"
     prism:ViewModelLocator.AutoWireViewModel="True"
+    KeyDown="LoginMainView_OnKeyDown"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Window.Resources>
@@ -21,102 +22,191 @@
         <!--  WorkerReportsProgress="True"  -->
         <!--  WorkerSupportsCancellation="True" />  -->
         <!-- <ImageBrush x:Key="Icon" ImageSource="pack://application:,,,Common;component/Images/systemIcon.JPG" /> -->
-        <DataTemplate x:Key="LoginTemplate" DataType="{x:Type viewModels:LoginMainViewModel}">
-            <Grid
-                Margin="10"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="30" />
-                    <RowDefinition Height="30" />
-                    <RowDefinition Height="30" />
-                    <RowDefinition Height="30" />
-                    <RowDefinition Height="50" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="200" />
-                    <ColumnDefinition Width="120" />
-                </Grid.ColumnDefinitions>
-                <Border
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    Width="280"
-                    Height="250"
-                    Margin="0,50,0,20">
-                    <Image
-                        MinWidth="280"
-                        MinHeight="250"
-                        Source="pack://application:,,,/Common;component/Images/icon.jpg" />
-                </Border>
-                <Label
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    VerticalContentAlignment="Center"
-                    Content="账号："
-                    FontWeight="Bold" />
-                <TextBox
-                    Grid.Row="2"
-                    Grid.Column="0"
-                    Width="200"
-                    Height="30"
-                    VerticalContentAlignment="Center"
-                    KeyDown="PhoneTextBox_OnKeyDown"
-                    Text="{Binding Account}" />
-                <Label
-                    Grid.Row="3"
-                    Grid.Column="0"
-                    VerticalContentAlignment="Center"
-                    Content="密码："
-                    FontWeight="Bold" />
-                <TextBox
-                    x:Name="PasswordTextBox"
-                    Grid.Row="4"
-                    Grid.Column="0"
-                    Width="200"
-                    Height="30"
-                    VerticalContentAlignment="Center"
-                    KeyDown="PasswordTextBox_OnKeyDown"
-                    Text="{Binding Password}" />
-                <Button
-                    Grid.Row="2"
-                    Grid.Column="1"
-                    Width="80"
-                    Height="30"
-                    Margin="10,0,0,0"
-                    Command="{Binding RegisterCommand}"
-                    Content="注册" />
-                <Button
-                    Name="LoginButton"
-                    Grid.Row="4"
-                    Grid.Column="1"
-                    Width="80"
-                    Height="30"
-                    Margin="10,0,0,0"
-                    Command="{Binding LoginCommand}"
-                    Content="登録" />
-                <Button
-                    Grid.Row="5"
-                    Grid.Column="1"
-                    Width="80"
-                    Height="30"
-                    Margin="10,0,0,0"
-                    Command="{Binding UpdatePasswordCommand}"
-                    Content="忘了密码？" />
-            </Grid>
-        </DataTemplate>
-        <selectors:LoginViewSelector x:Key="LoginViewSelector" LoginTemplate="{StaticResource LoginTemplate}" />
     </Window.Resources>
     <Grid>
-        <!-- <Border Visibility="{Binding DisplayLogin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"> -->
-        <!--     <userControls:LoginView x:Name="LoginView" DataContext="{Binding LoginViewModel}" /> -->
-        <!-- </Border> -->
-        <!-- <Border Visibility="{Binding DisplayRegister, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"> -->
-        <!--     <userControls:RegisterView DataContext="{Binding RegisterViewModel}" /> -->
-        <!-- </Border> -->
-        <Border Visibility="Visible">
-            <UserControl ContentTemplateSelector="{StaticResource LoginViewSelector}" DataContext="{Binding LoginViewModel}" />
-        </Border>
+        <UserControl x:Name="Control">
+            <UserControl.Style>
+                <Style TargetType="UserControl">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ViewMode}" Value="0">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Grid
+                                            Margin="10"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Top">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="30" />
+                                                <RowDefinition Height="30" />
+                                                <RowDefinition Height="30" />
+                                                <RowDefinition Height="30" />
+                                                <RowDefinition Height="50" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="200" />
+                                                <ColumnDefinition Width="120" />
+                                            </Grid.ColumnDefinitions>
+                                            <Border
+                                                Grid.Row="0"
+                                                Grid.Column="0"
+                                                Grid.ColumnSpan="2"
+                                                Width="280"
+                                                Height="250"
+                                                Margin="0,50,0,20">
+                                                <Image
+                                                    MinWidth="280"
+                                                    MinHeight="250"
+                                                    Source="pack://application:,,,/Common;component/Images/icon.jpg" />
+                                            </Border>
+                                            <Label
+                                                Grid.Row="1"
+                                                Grid.Column="0"
+                                                VerticalContentAlignment="Center"
+                                                Content="账号："
+                                                FontWeight="Bold" />
+                                            <TextBox
+                                                Grid.Row="2"
+                                                Grid.Column="0"
+                                                Width="200"
+                                                Height="30"
+                                                VerticalContentAlignment="Center"
+                                                Text="{Binding LoginViewModel.Account}" />
+                                            <Label
+                                                Grid.Row="3"
+                                                Grid.Column="0"
+                                                VerticalContentAlignment="Center"
+                                                Content="密码："
+                                                FontWeight="Bold" />
+                                            <TextBox
+                                                x:Name="PasswordTextBox"
+                                                Grid.Row="4"
+                                                Grid.Column="0"
+                                                Width="200"
+                                                Height="30"
+                                                VerticalContentAlignment="Center"
+                                                Text="{Binding LoginViewModel.Password}" />
+                                            <Button
+                                                Grid.Row="2"
+                                                Grid.Column="1"
+                                                Width="80"
+                                                Height="30"
+                                                Margin="10,0,0,0"
+                                                Command="{Binding LoginViewModel.RegisterCommand}"
+                                                Content="注册" />
+                                            <Button
+                                                Name="LoginButton"
+                                                Grid.Row="4"
+                                                Grid.Column="1"
+                                                Width="80"
+                                                Height="30"
+                                                Margin="10,0,0,0"
+                                                Command="{Binding LoginViewModel.LoginCommand}"
+                                                Content="登録" />
+                                            <Button
+                                                Grid.Row="5"
+                                                Grid.Column="1"
+                                                Width="80"
+                                                Height="30"
+                                                Margin="10,0,0,0"
+                                                Command="{Binding LoginViewModel.UpdatePasswordCommand}"
+                                                Content="忘了密码？" />
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ViewMode}" Value="1">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="50" />
+                                                <RowDefinition Height="50" />
+                                                <RowDefinition Height="50" />
+                                                <RowDefinition Height="50" />
+                                                <RowDefinition Height="50" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="100" />
+                                                <ColumnDefinition Width="80" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="100" />
+                                            </Grid.ColumnDefinitions>
+                                            <Border
+                                                Grid.Row="0"
+                                                Grid.Column="1"
+                                                Grid.ColumnSpan="2"
+                                                Width="280"
+                                                Height="250">
+                                                <Image
+                                                    MinWidth="280"
+                                                    MinHeight="250"
+                                                    Source="pack://application:,,,/Common;component/Images/icon.jpg" />
+                                            </Border>
+                                            <Label
+                                                Grid.Row="1"
+                                                Grid.Column="1"
+                                                Height="30"
+                                                Content="手机号" />
+                                            <TextBox
+                                                Grid.Row="1"
+                                                Grid.Column="2"
+                                                Height="30"
+                                                VerticalContentAlignment="Center"
+                                                Text="{Binding RegisterViewModel.Phone}" />
+                                            <Label
+                                                Grid.Row="2"
+                                                Grid.Column="1"
+                                                Height="30"
+                                                Content="密码" />
+                                            <TextBox
+                                                Grid.Row="2"
+                                                Grid.Column="2"
+                                                Height="30"
+                                                VerticalContentAlignment="Center"
+                                                Text="{Binding RegisterViewModel.Password}" />
+                                            <Label
+                                                Grid.Row="3"
+                                                Grid.Column="1"
+                                                Height="30"
+                                                Content="再次输入" />
+                                            <TextBox
+                                                Grid.Row="3"
+                                                Grid.Column="2"
+                                                Height="30"
+                                                VerticalContentAlignment="Center"
+                                                Text="{Binding RegisterViewModel.CheckPassword}" />
+                                            <DockPanel
+                                                Grid.Row="4"
+                                                Grid.Column="1"
+                                                Grid.ColumnSpan="2"
+                                                LastChildFill="False">
+                                                <Button
+                                                    Height="30"
+                                                    MinWidth="70"
+                                                    Command="{Binding RegisterViewModel.CancelCommand}"
+                                                    Content="返回登录"
+                                                    DockPanel.Dock="Left" />
+                                                <Button
+                                                    Height="30"
+                                                    MinWidth="70"
+                                                    Command="{Binding RegisterViewModel.RegisterCommand}"
+                                                    Content="注册"
+                                                    DockPanel.Dock="Right" />
+                                            </DockPanel>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </UserControl.Style>
+        </UserControl>
     </Grid>
 </Window>

@@ -77,7 +77,7 @@ namespace ConvertTool.ViewModels
 
         private void Register()
         {
-            ParentViewModel.DisplayLogin = Visibility.Collapsed;
+            // ParentViewModel.DisplayLogin = Visibility.Collapsed;
             ParentViewModel.ViewMode = Constants.LoginViewMode.Register;
         }
 

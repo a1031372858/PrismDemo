@@ -3,6 +3,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Windows;
 using Common.Bases;
+using Common.Enums;
 using Common.Utility;
 using Common.ViewModels;
 using Common.Views;
@@ -124,7 +125,7 @@ namespace ConvertTool.ViewModels
         {
             if (ParentViewModel != null)
             {
-                ParentViewModel.DisplayRegister = Visibility.Collapsed;
+                ParentViewModel.ViewMode = Constants.LoginViewMode.Login;
             }
         }
     }

@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using Common.Enums;
+using ConvertTool.ViewModels;
 
 namespace ConvertTool.Selectors
 {
@@ -14,8 +15,9 @@ namespace ConvertTool.Selectors
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            if (item is Constants.LoginViewMode loginViewMode)
+            if (item is LoginMainViewModel vm)
             {
+                var loginViewMode = vm.ViewMode;
                 switch (loginViewMode)
                 {
                     case Constants.LoginViewMode.Login:
