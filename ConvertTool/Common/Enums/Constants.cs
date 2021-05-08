@@ -6,11 +6,11 @@ namespace Common.Enums
     {
         public enum LoginViewMode
         {
-            [Code("0")]
-            Login=0,
-            [Code("1")]
+            [Code("0"),Description("ログイン")]
+            Login =0,
+            [Code("1"), Description("登録")]
             Register =1,
-            [Code("2")]
+            [Code("2"), Description("パスワードを変更する")]
             UpdatePsw =2,
         }
     }

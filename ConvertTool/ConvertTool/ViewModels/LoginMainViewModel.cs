@@ -9,11 +9,7 @@ namespace ConvertTool.ViewModels
         private Constants.LoginViewMode _viewMode = Constants.LoginViewMode.Login;
         public Constants.LoginViewMode ViewMode
         {
-            set
-            {
-                SetProperty(ref _viewMode, value);
-                RaisePropertyChanged(nameof(LoginMainViewModel));
-            }
+            set => SetProperty(ref _viewMode, value);
             get => _viewMode;
         }
 

@@ -1,14 +1,12 @@
-﻿using System.Linq;
-using System.Windows;
-using Common.Bases;
-using Common.Enums;
+﻿using Common.Bases;
 using Common.Utility;
-using Common.ViewModels;
-using Common.Views;
 using Prism.Commands;
 using Prism.Ioc;
 using SqlData;
 using SqlData.Beans;
+using System.Linq;
+using System.Windows;
+using LoginViewMode = Common.Enums.Constants.LoginViewMode;
 
 namespace ConvertTool.ViewModels
 {
@@ -67,6 +65,7 @@ namespace ConvertTool.ViewModels
 
         public DelegateCommand UpdatePsdCommand { set; get; }
 
+        public DelegateCommand CancelCommand { set; get; }
         protected override void Init()
         {
             _checkCode = "666666";
@@ -76,6 +75,12 @@ namespace ConvertTool.ViewModels
         {
             CheckCommand = new DelegateCommand(Check);
             UpdatePsdCommand = new DelegateCommand(UpdatePasswrod);
+            CancelCommand = new DelegateCommand(Cancel);
+        }
+
+        private void Cancel()
+        {
+            ParentViewModel.ViewMode = LoginViewMode.Login;
         }
 
         private void UpdatePasswrod()
@@ -91,7 +96,7 @@ namespace ConvertTool.ViewModels
             {
                 _user.UserPassword = Password;
                 dataContext.SaveChanges();
-                ParentViewModel.ViewMode = Constants.LoginViewMode.Login;
+                ParentViewModel.ViewMode = LoginViewMode.Login;
             }
         }
 

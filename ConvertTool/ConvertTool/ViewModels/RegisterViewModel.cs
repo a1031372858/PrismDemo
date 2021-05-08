@@ -70,55 +70,39 @@ namespace ConvertTool.ViewModels
         private async void Register()
         {
             var context = Container.Resolve<PostgreSqlContext>();
-
-            var userList = context.UserDetail.ToList();
-            if (userList.Any(o => o.Phone == Phone))
+            try
             {
-                MessageUtility.ShowMessage("该手机号已注册！");
-                return;
+
+                if (context.UserDetail.Any(o => o.Phone == Phone))
+                {
+                    MessageUtility.ShowMessage("该手机号已注册！");
+                    return;
+                }
+
+                var newUserId = context.UserDetail.Max(o => o.UserId);
+                newUserId++;
+                if (Password != CheckPassword || string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(Phone)) return;
+
+                var user = new UserDetail
+                {
+                    UserId = newUserId,
+                    Phone = Phone,
+                    UserPassword = Password,
+                    BirthDay = DateTime.MinValue,
+                    Sex = "1",
+                    CreateUser = "0",
+                    CreateDate = DateTime.Now,
+                    UpdateUser = "0",
+                    UpdateDate = DateTime.Now,
+                };
+                await context.UserDetail.AddAsync(user);
+                await context.SaveChangesAsync();
             }
-
-            var newUserId = userList.Max(o => o.UserId);
-            newUserId++;
-            if (Password != CheckPassword || string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(Phone)) return;
-
-            var user = new UserDetail
+            catch (Exception e)
             {
-                UserId = newUserId,
-                Phone = Phone,
-                UserPassword = Password,
-                BirthDay = DateTime.MinValue,
-                Sex = "1",
-                CreateUser = "0",
-                CreateDate = DateTime.Now,
-                UpdateUser = "0",
-                UpdateDate = DateTime.Now,
-            };
-           await context.UserDetail.AddAsync(user);
-           await context.SaveChangesAsync();
-
-           // string dataSource = @"PORT=5432;DATABASE=usermanager;HOST=localhost;PASSWORD=666666;USER ID=postgres;";
-           // if(Password!=CheckPassword||string.IsNullOrEmpty(Password)||string.IsNullOrEmpty(Phone))return;
-           // try
-           // {
-           //     using (NpgsqlConnection connection = new NpgsqlConnection(dataSource))
-           //     {
-           //         connection.Open();
-           //         var sql = string.Format("insert into \"user\" VALUES(123457,'{0}','{1}','{0}','1',50,'{0}')", Phone,Password);
-           //         NpgsqlCommand command = new NpgsqlCommand(sql,connection);
-           //         command.ExecuteNonQuery();
-           //     }
-           // }
-           // catch (Exception e)
-           // {
-           //     Console.WriteLine(e);
-           //     throw;
-           // }
-           // finally
-           // {
-           //
-           // }
-
+                Console.WriteLine(e);
+                MessageUtility.ShowMessage("数据库登录失败！");
+            }
         }
 
         private void Cancel()
