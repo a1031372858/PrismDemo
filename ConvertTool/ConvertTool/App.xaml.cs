@@ -8,6 +8,7 @@ using Common.RegionAdapter;
 using Common.ViewModels;
 using Common.Views;
 using ConvertTool.Views;
+using Games.Views;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
 using Prism.Events;
@@ -38,7 +39,7 @@ namespace ConvertTool
             container.RegisterInstance<IContainerProvider>(Container);
             var provider = new UnityServiceLocator(container);
             ServiceLocator.SetLocatorProvider(() => provider);
-            return Container.Resolve<LoginMainView>();
+            return Container.Resolve<SnakeView>();
         }
 
 

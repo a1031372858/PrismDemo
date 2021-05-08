@@ -5,37 +5,53 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Games.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="clr-namespace:Games.Model"
     xmlns:mvvm="http://prismlibrary.com/"
-    Title="贪吃蛇"
-    Width="800"
-    Height="450"
+    Title="Snake"
+    Width="600"
+    Height="500"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
     Loaded="SnakeView_OnLoaded"
     mc:Ignorable="d">
-    <Grid Name="GameGrid">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10" />
-            <ColumnDefinition Width="10" />
-            <ColumnDefinition Width="10" />
-            <ColumnDefinition Width="10" />
-            <ColumnDefinition Width="10" />
-            <ColumnDefinition Width="10" />
-            <ColumnDefinition Width="10" />
-            <ColumnDefinition Width="10" />
-            <ColumnDefinition Width="10" />
-            <ColumnDefinition Width="10" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="10" />
-            <RowDefinition Height="10" />
-            <RowDefinition Height="10" />
-            <RowDefinition Height="10" />
-            <RowDefinition Height="10" />
-            <RowDefinition Height="10" />
-            <RowDefinition Height="10" />
-            <RowDefinition Height="10" />
-            <RowDefinition Height="10" />
-            <RowDefinition Height="10" />
-        </Grid.RowDefinitions>
+    <Window.Resources>
+        <DataTemplate x:Key="ColumnTemplate" DataType="{x:Type model:ChessboardCellModel}">
+            <Border
+                Width="40"
+                Height="40"
+                Background="{Binding CellBackground}"
+                BorderBrush="Red"
+                BorderThickness="0,0,0.5,0" />
+        </DataTemplate>
+        <DataTemplate x:Key="RowTemplate" DataType="{x:Type model:ChessboardRowModel}">
+            <Border BorderBrush="Red" BorderThickness="0,0,0,0.5">
+                <ItemsControl
+                    BorderThickness="0"
+                    ItemTemplate="{StaticResource ColumnTemplate}"
+                    ItemsSource="{Binding CellList}"
+                    SnapsToDevicePixels="False">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </Border>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Border
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            BorderBrush="Red"
+            BorderThickness="0.5,0.5,0,0">
+            <ItemsControl
+                Name="SnakeGame"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                BorderThickness="0"
+                ItemTemplate="{StaticResource RowTemplate}"
+                ItemsSource="{Binding ChessboardRowList}"
+                SnapsToDevicePixels="False" />
+        </Border>
     </Grid>
 </Window>
