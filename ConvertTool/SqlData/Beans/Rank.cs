@@ -16,9 +16,9 @@ namespace SqlData.Beans
         public int UserId { set; get; }
 
         [Column("game_id")]
-        public string GameId { set; get; }
+        public int GameId { set; get; }
 
         [Column("grade")]
-        public string Grade { set; get; }
+        public int Grade { set; get; }
     }
 }
