@@ -7,6 +7,7 @@ using Common.Enums;
 using Common.Utility;
 using Common.ViewModels;
 using Common.Views;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Internal;
 using Npgsql;
 using Prism.Commands;

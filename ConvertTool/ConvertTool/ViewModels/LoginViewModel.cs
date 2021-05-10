@@ -77,7 +77,6 @@ namespace ConvertTool.ViewModels
 
         private void Register()
         {
-            // ParentViewModel.DisplayLogin = Visibility.Collapsed;
             ParentViewModel.ViewMode = Constants.LoginViewMode.Register;
         }
 
@@ -86,8 +85,7 @@ namespace ConvertTool.ViewModels
             if (!string.IsNullOrEmpty(Account) && !string.IsNullOrEmpty(Password))
             {
                 var context = Container.Resolve<PostgreSqlContext>();
-                var userList = context.UserDetail.ToList();
-                if (userList.Any(o => o.Phone == Account && o.UserPassword == Password))
+                if (context.UserDetail.Any(o => o.Phone == Account && o.UserPassword == Password))
                 {
                     Container.Resolve<SnakeView>().Show();
                     Container.Resolve<LoginMainView>().Close();
