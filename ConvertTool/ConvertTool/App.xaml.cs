@@ -39,7 +39,7 @@ namespace ConvertTool
             container.RegisterInstance<IContainerProvider>(Container);
             var provider = new UnityServiceLocator(container);
             ServiceLocator.SetLocatorProvider(() => provider);
-            return Container.Resolve<GameRankView>();
+            return Container.Resolve<LoginMainView>();
         }
 
 

@@ -80,7 +80,12 @@ namespace ConvertTool.ViewModels
                     return;
                 }
 
-                var newUserId = context.UserDetail.Max(o => o.UserId);
+                var newUserId = 0;
+                if (context.UserDetail.Any())
+                {
+                    newUserId = context.UserDetail.Max(o => o.UserId);
+                }
+
                 newUserId++;
                 if (Password != CheckPassword || string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(Phone)) return;
 

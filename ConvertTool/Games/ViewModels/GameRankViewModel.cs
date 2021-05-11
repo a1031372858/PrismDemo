@@ -19,6 +19,14 @@ namespace Games.ViewModels
         protected override void Init()
         {
             var sqlContext=Container.Resolve<PostgreSqlContext>();
+            if (sqlContext.Database.EnsureCreated())
+            {
+
+            }
+            else
+            {
+
+            }
             
         }
 
