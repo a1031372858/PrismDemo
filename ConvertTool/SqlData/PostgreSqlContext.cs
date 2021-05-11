@@ -2,6 +2,7 @@
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Npgsql;
 using SqlData.Beans;
 
 namespace SqlData
@@ -23,10 +24,11 @@ namespace SqlData
         // {
         //     _factory = loggerFactory;
         // }
+        private static NpgsqlConnection _connection = new NpgsqlConnection($@"PORT={Port};DATABASE={DbName};HOST={Host};PASSWORD={Password};USER ID={UserId};");
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql($@"PORT={Port};DATABASE={DbName};HOST={Host};PASSWORD={Password};USER ID={UserId};");
+            optionsBuilder.UseNpgsql(_connection);
         }
 
         public DbSet<UserDetail> UserDetail { set; get; }

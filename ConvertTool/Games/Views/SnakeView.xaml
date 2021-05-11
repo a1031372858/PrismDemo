@@ -12,6 +12,7 @@
     Height="800"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
     KeyDown="SnakeView_OnKeyDown"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Window.Resources>
         <DataTemplate x:Key="ColumnTemplate" DataType="{x:Type model:ChessboardCellModel}">

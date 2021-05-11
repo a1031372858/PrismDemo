@@ -1,8 +1,14 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="ImageSource.xaml" />
+    </ResourceDictionary.MergedDictionaries>
     <Style TargetType="Button">
         <Setter Property="Padding" Value="5,0" />
         <Setter Property="Height" Value="22" />
         <Setter Property="Width" Value="50" />
         <Setter Property="Background" Value="AliceBlue" />
+    </Style>
+    <Style TargetType="Window">
+        <Setter Property="Icon" Value="{StaticResource WindowIcon}" />
     </Style>
 </ResourceDictionary>
