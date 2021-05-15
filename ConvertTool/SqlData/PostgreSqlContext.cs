@@ -39,6 +39,8 @@ namespace SqlData
 
         public DbSet<Game> Game { set; get; }
 
+        public DbSet<Role> Role { set; get; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

@@ -139,6 +139,7 @@
     <Compile Include="Bases\BeanBase.cs" />
     <Compile Include="Beans\Game.cs" />
     <Compile Include="Beans\Rank.cs" />
+    <Compile Include="Beans\Role.cs" />
     <Compile Include="Beans\UserDetail.cs" />
     <Compile Include="Migrations\20210511060444_Init_First.cs" />
     <Compile Include="Migrations\20210511060444_Init_First.designer.cs">
