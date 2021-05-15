@@ -43,6 +43,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="50" />
         </Grid.RowDefinitions>
         <Border
             Grid.Row="0"
@@ -66,8 +67,8 @@
                     Height="30"
                     Margin="20,0,0,0"
                     VerticalAlignment="Center"
-                    Command="{Binding UploadCommand}"
-                    Content="上传得分"
+                    Command="{Binding ShowRankViewCommand}"
+                    Content="排行榜"
                     Focusable="False" />
             </WrapPanel>
         </Border>
@@ -88,5 +89,23 @@
                 ItemsSource="{Binding ChessboardRowList}"
                 SnapsToDevicePixels="False" />
         </Border>
+        <WrapPanel Grid.Row="2">
+            <Button
+                Width="100"
+                Height="30"
+                Margin="20,0,0,0"
+                VerticalAlignment="Center"
+                Command="{Binding UploadCommand}"
+                Content="上传得分"
+                Focusable="False" />
+            <!--  <Button  -->
+            <!--  Width="100"  -->
+            <!--  Height="30"  -->
+            <!--  Margin="20,0,0,0"  -->
+            <!--  VerticalAlignment="Center"  -->
+            <!--  Command="{Binding LoginCommand}"  -->
+            <!--  Content="前往登录"  -->
+            <!--  Focusable="False" />  -->
+        </WrapPanel>
     </Grid>
 </Window>

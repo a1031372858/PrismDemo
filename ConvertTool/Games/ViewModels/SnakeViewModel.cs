@@ -4,8 +4,10 @@ using System.Linq;
 using System.Windows.Threading;
 using Common.Bases;
 using Common.Enums;
+using Common.Global;
 using Common.Utility;
 using Games.Model;
+using Games.Views;
 using Prism.Commands;
 using Prism.Ioc;
 using SqlData;
@@ -99,6 +101,9 @@ namespace Games.ViewModels
         }
 
         public DelegateCommand UploadCommand { set; get; }
+        public DelegateCommand ShowRankViewCommand { set; get; }
+        public DelegateCommand LoginCommand { set; get; }
+        
 
         protected override void RegisterProperties()
         {
@@ -108,8 +113,10 @@ namespace Games.ViewModels
 
         protected override void RegisterCommands()
         {
-            UploadCommand = new DelegateCommand(Upload);
+            UploadCommand = new DelegateCommand(Upload); 
+             ShowRankViewCommand = new DelegateCommand(ShowRankView);
         }
+
 
 
         protected override void Init()
@@ -268,6 +275,11 @@ namespace Games.ViewModels
 
         private void Upload()
         {
+            if (GlobalData.LoginUser == null)
+            {
+                MessageUtility.ShowMessage("登录失效，请重新登录");
+                return;
+            }
             var sqlContext = Container.Resolve<PostgreSqlContext>();
 
             var rankId = 0;
@@ -279,11 +291,22 @@ namespace Games.ViewModels
             {
                 RankId = ++rankId,
                 Grade = Grade,
-                UserId = 1,
+                UserId = GlobalData.LoginUser.UserId,
                 GameId = 1,
             };
             sqlContext.Rank.Add(rank);
-            sqlContext.SaveChanges();
+            sqlContext.SaveChangesAsync();
+            MessageUtility.ShowMessage("上传成功!");
+            GameStatus = Constants.GameStatus.Init;
+        }
+
+
+        private void ShowRankView()
+        {
+            var view =Container.Resolve<GameRankView>();
+            view.ShowDialog();
         }
     }
+
+
 }

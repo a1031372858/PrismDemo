@@ -17,6 +17,8 @@ namespace SqlData.Beans
 
         [Column("user_password")]
         public string UserPassword { set; get; }
+        [Column("display_name")]
+        public string DisplayName { set; get; }
         [Column("sex")]
         public string Sex { set; get; }
         [Column("birthday")]

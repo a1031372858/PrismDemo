@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows;
 using Common.Bases;
 using Common.Enums;
+using Common.Global;
 using Common.Utility;
 using Common.Views;
 using ConvertTool.Views;
@@ -85,10 +86,24 @@ namespace ConvertTool.ViewModels
             if (!string.IsNullOrEmpty(Account) && !string.IsNullOrEmpty(Password))
             {
                 var context = Container.Resolve<PostgreSqlContext>();
-                if (context.UserDetail.Any(o => o.Phone == Account && o.UserPassword == Password))
+                var loginUser = context.UserDetail.FirstOrDefault(o => o.Phone == Account);
+                if (loginUser!=null)
                 {
-                    Container.Resolve<SnakeView>().Show();
-                    Container.Resolve<LoginMainView>().Close();
+                    if (loginUser.UserPassword == Password)
+                    {
+                        MessageUtility.ShowMessage("登录成功！");
+                        GlobalData.LoginUser = loginUser;
+                        Container.Resolve<SnakeView>().Show();
+                        Container.Resolve<LoginMainView>().Close();
+                    }
+                    else
+                    {
+                        MessageUtility.ShowMessage("用户名或密码错误！");
+                    }
+                }
+                else
+                {
+                    MessageUtility.ShowMessage("该用户不存在！");
                 }
                 
 
@@ -105,6 +120,10 @@ namespace ConvertTool.ViewModels
                 // {
                 //     view.Close();
                 // }
+            }
+            else
+            {
+                MessageUtility.ShowMessage("用户名或密码不能为空！");
             }
         }
         private void UpdatePassword()

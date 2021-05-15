@@ -64,7 +64,7 @@ namespace Games.Views
                     if (vm.RunDirection != Constants.SnakeDirection.Down )
                     {
                         vm.NextDirection = Constants.SnakeDirection.Up;
-                        if(vm.SnakeMove())return;
+                        if(!vm.SnakeMove())return;
                         vm._timer.Stop();
                         vm._timer.Start();
                     }
@@ -74,7 +74,7 @@ namespace Games.Views
                     if (vm.RunDirection != Constants.SnakeDirection.Up)
                     {
                         vm.NextDirection = Constants.SnakeDirection.Down;
-                        if (vm.SnakeMove()) return;
+                        if (!vm.SnakeMove()) return;
                         vm._timer.Stop();
                         vm._timer.Start();
                     }
@@ -84,7 +84,7 @@ namespace Games.Views
                     if (vm.RunDirection != Constants.SnakeDirection.Right)
                     {
                         vm.NextDirection = Constants.SnakeDirection.Left;
-                        if (vm.SnakeMove()) return;
+                        if (!vm.SnakeMove()) return;
                         vm._timer.Stop();
                         vm._timer.Start();
                     }
@@ -94,7 +94,7 @@ namespace Games.Views
                     if (vm.RunDirection != Constants.SnakeDirection.Left)
                     {
                         vm.NextDirection = Constants.SnakeDirection.Right;
-                        if (vm.SnakeMove()) return;
+                        if (!vm.SnakeMove()) return;
                         vm._timer.Stop();
                         vm._timer.Start();
                     }
