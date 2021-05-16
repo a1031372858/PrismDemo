@@ -1,14 +1,18 @@
 ﻿
 
 using System;
+using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using Common.RegionAdapter;
+using Common.Utility;
 using Common.ViewModels;
 using Common.Views;
 using ConvertTool.Views;
 using Games.Views;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
 using Prism.Events;
@@ -29,16 +33,26 @@ namespace ConvertTool
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<LoginMainView>();
-            containerRegistry.RegisterSingleton<PostgreSqlContext>();
-        }
+            containerRegistry.Register<DbContext>();
 
-        protected override Window CreateShell()
-        {
             var container = new UnityContainer();
+
             container.RegisterInstance<IEventAggregator>(new EventAggregator());
             container.RegisterInstance<IContainerProvider>(Container);
             var provider = new UnityServiceLocator(container);
             ServiceLocator.SetLocatorProvider(() => provider);
+        }
+
+        protected override Window CreateShell()
+        {
+
+            var processList = Process.GetProcesses().ToList();
+            if (processList.Count(o => o.ProcessName == "ConvertTool")>1)
+            {
+                var obj =processList.FirstOrDefault(o => o.ProcessName == "ConvertTool");
+                MessageUtility.ShowMessage("程序已启动");
+                return null;
+            }
             return Container.Resolve<LoginMainView>();
         }
 

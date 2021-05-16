@@ -2,7 +2,11 @@
     x:Class="ConvertTool.Views.LoginMainView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:bases="clr-namespace:Common.Bases;assembly=Common"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:interactionRequest="http://www.codeplex.com/prism"
+    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
     Title="{Binding Title}"
@@ -11,6 +15,11 @@
     prism:ViewModelLocator.AutoWireViewModel="True"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <interactionRequest:InteractionRequestTrigger SourceObject="{Binding ConfirmationRequest, Mode=OneWay}">
+            <bases:AlertWindowAction/>
+        </interactionRequest:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
     <Window.Resources>
         <!--  <cm:BackgroundWorker  -->
         <!--  x:Key="backgroundWorker"  -->

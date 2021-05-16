@@ -118,7 +118,6 @@ namespace Games.ViewModels
         }
 
 
-
         protected override void Init()
         {
             for (int i = 0; i < _maxY; i++)
