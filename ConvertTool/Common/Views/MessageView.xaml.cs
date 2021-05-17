@@ -11,13 +11,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Common.Bases;
 
 namespace Common.Views
 {
     /// <summary>
     /// MessageView.xaml の相互作用ロジック
     /// </summary>
-    public partial class MessageView : Window
+    public partial class MessageView : UserControl
     {
 
         public MessageView()
@@ -29,13 +30,15 @@ namespace Common.Views
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                this.DragMove();
             }
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            if (DataContext is ViewModelBase vm)
+            {
+                // vm.OnDialogClosed();
+            }
         }
     }
 }

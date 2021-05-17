@@ -1,10 +1,12 @@
 ﻿
 
+using System;
 using System.ComponentModel;
 using Common.ViewModels;
 using Common.Views;
 using Microsoft.Practices.ServiceLocation;
 using Prism.Ioc;
+using Prism.Services.Dialogs;
 
 namespace Common.Utility
 {
@@ -13,13 +15,18 @@ namespace Common.Utility
         public static bool? ShowMessage(string msg)
         {
             var container = ServiceLocator.Current.GetInstance<IContainerProvider>();
-            var view = container.Resolve<MessageView>();
-            if (view.DataContext is MessageViewModel vm)
+            var dialogService = container?.Resolve<IDialogService>();
+            var result = false;
+            var param = new DialogParameters {{"message", msg}, {"title", "tips"}};
+            dialogService?.ShowDialog("MessageView", param, o =>
             {
-                vm.Message = msg;
-            }
+                if (o.Result == ButtonResult.OK)
+                {
+                    result = true;
+                }
+            });
 
-            return view.ShowDialog();
+            return result;
         }
     }
 }

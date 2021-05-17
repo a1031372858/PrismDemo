@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using Common.Bases;
@@ -10,6 +11,7 @@ using ConvertTool.Views;
 using Games.Views;
 using Prism.Commands;
 using Prism.Ioc;
+using Prism.Services.Dialogs;
 using SqlData;
 
 namespace ConvertTool.ViewModels

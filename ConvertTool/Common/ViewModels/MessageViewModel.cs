@@ -1,4 +1,5 @@
 ﻿using Common.Bases;
+using Prism.Services.Dialogs;
 
 namespace Common.ViewModels
 {
@@ -13,7 +14,13 @@ namespace Common.ViewModels
 
         protected override void Init()
         {
-            Message = "密码错误！";
+            Message = "客户端出现错误！";
+        }
+
+        protected override void DialogOpened(IDialogParameters parameters)
+        {
+            Message= parameters.GetValue<string>("message");
+            Title = parameters.GetValue<string>("title");
         }
     }
 }

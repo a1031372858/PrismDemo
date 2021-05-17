@@ -18,8 +18,35 @@ namespace Common.Bases
 {
     public class ViewModelBase : BindableBase, INotifyDataErrorInfo,IDialogAware
     {
-        private string _title;
 
+        public IEventAggregator EventAggregator { get; }
+
+        public IContainerProvider Container { get; }
+
+        public IDialogService DialogService { get; }
+
+        protected CompositeDisposable Disposable { get; } = new CompositeDisposable();
+
+        public event Action<IDialogResult> RequestClose;
+
+        public bool HasErrors { get; }
+
+        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+
+        private ErrorsContainer<string> _errorsContainer;
+
+        protected ErrorsContainer<string> ErrorsContainer
+        {
+            get
+            {
+                if (_errorsContainer == null)
+                    _errorsContainer = new ErrorsContainer<string>(OnErrorsChanged);
+
+                return _errorsContainer;
+            }
+        }
+
+        private string _title;
 
         public string Title
         {
@@ -27,22 +54,20 @@ namespace Common.Bases
             get => _title;
         }
 
-        public event Action<IDialogResult> RequestClose;
-
-        public IEventAggregator EventAggregator { get; }
-
-        public IContainerProvider Container { get; }
-
-        protected CompositeDisposable Disposable { get; } = new CompositeDisposable();
-
         protected ViewModelBase()
         {
             EventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
             Container = ServiceLocator.Current.GetInstance<IContainerProvider>();
+            DialogService = Container.Resolve<IDialogService>();
+            RequestClose += ViewModel_Close;
             RegisterProperties();
             RegisterCommands();
             RegisterEvents();
             Init();
+        }
+
+        protected virtual void ViewModel_Close(IDialogResult obj)
+        {
         }
 
         protected virtual void RegisterEvents()
@@ -74,21 +99,6 @@ namespace Common.Bases
 
         }
 
-
-
-        private ErrorsContainer<string> _errorsContainer;
-
-        protected ErrorsContainer<string> ErrorsContainer
-        {
-            get
-            {
-                if (_errorsContainer == null)
-                    _errorsContainer = new ErrorsContainer<string>(OnErrorsChanged);
-
-                return _errorsContainer;
-            }
-        }
-
         public void OnErrorsChanged(string propertyName)
         {
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
@@ -99,8 +109,6 @@ namespace Common.Bases
             return ErrorsContainer.GetErrors(propertyName);
         }
 
-        public bool HasErrors { get; }
-        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
 
         public bool CanCloseDialog()
         {
@@ -109,12 +117,18 @@ namespace Common.Bases
 
         public void OnDialogClosed()
         {
-
+            RequestClose?.Invoke(new DialogResult(ButtonResult.OK));
         }
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
+            DialogOpened(parameters);
+        }
+
+        protected virtual void DialogOpened(IDialogParameters parameters)
+        {
 
         }
+
     }
 }

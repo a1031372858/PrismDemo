@@ -1,12 +1,24 @@
-﻿using System;
+﻿using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
+using System;
+using System.Reflection;
 using System.Windows;
-using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Xaml.Behaviors;
+using Prism.Common;
 
 namespace Common.Bases
 {
     public class AlertWindowAction : TriggerAction<FrameworkElement>
     {
+        public static readonly DependencyProperty WindowNameProperty = DependencyProperty.Register("WindowName",
+            typeof(string), typeof(AlertWindowAction), new PropertyMetadata(string.Empty));
+
+        public string WindowName
+        {
+            get => (string)GetValue(WindowNameProperty);
+            set => SetValue(WindowNameProperty, value);
+        }
+
+
         protected override void Invoke(object parameter)
         {
             if (!(parameter is InteractionRequestedEventArgs arg))
@@ -26,6 +38,11 @@ namespace Common.Bases
         }
         Window GetChildWindow(INotification notification)
         {
+            if (!string.IsNullOrEmpty(WindowName))
+            {
+                var obj =Assembly.Load(WindowName);
+            }
+
             var childWindow = this.CreateDefaultWindow(notification);
             childWindow.DataContext = notification;
 
