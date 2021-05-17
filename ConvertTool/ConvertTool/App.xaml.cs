@@ -47,11 +47,10 @@ namespace ConvertTool
 
         protected override Window CreateShell()
         {
-
-            var processList = Process.GetProcesses().ToList();
-            if (processList.Count(o => o.ProcessName == "ConvertTool")>1)
+            var name = Assembly.GetEntryAssembly()?.GetName().Name??string.Empty;
+            if (Process.GetProcessesByName(name).Length > 1)
             {
-                var obj =processList.FirstOrDefault(o => o.ProcessName == "ConvertTool");
+                // var obj = Process.GetProcessesByName("ConvertTool").FirstOrDefault();
                 MessageUtility.ShowMessage("程序已启动");
                 return null;
             }
