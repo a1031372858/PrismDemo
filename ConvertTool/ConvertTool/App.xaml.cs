@@ -23,6 +23,7 @@ using Prism.Regions;
 using Prism.Services.Dialogs;
 using Prism.Unity;
 using SqlData;
+using DialogWindow = Common.Views.DialogWindow;
 
 namespace ConvertTool
 {
@@ -36,6 +37,7 @@ namespace ConvertTool
             containerRegistry.RegisterSingleton<LoginMainView>();
             containerRegistry.Register<DbContext>();
             containerRegistry.RegisterDialog<MessageView>();
+            containerRegistry.RegisterDialogWindow<DialogWindow>();
 
             var container = new UnityContainer();
 

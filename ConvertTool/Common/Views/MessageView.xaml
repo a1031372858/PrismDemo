@@ -16,77 +16,83 @@
     MouseMove="MessageView_OnMouseMove"
     Opacity="0.8"
     mc:Ignorable="d">
-    <UserControl.Template>
-        <ControlTemplate TargetType="UserControl">
-            <Border
-                Width="{TemplateBinding Width}"
-                Height="{TemplateBinding Height}"
-                Padding="{TemplateBinding Padding}"
-                Background="{TemplateBinding Background}"
-                CornerRadius="5"
-                Opacity="{TemplateBinding Opacity}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <DockPanel
-                        x:Name="Header"
-                        Grid.Row="0"
-                        LastChildFill="False">
-                        <Image DockPanel.Dock="Left" />
-                        <TextBlock DockPanel.Dock="Left" Text="{Binding Title}" />
-                        <Button
-                            Padding="2"
-                            Background="Transparent"
-                            BorderThickness="0"
-                            Content="✖"
-                            DockPanel.Dock="Right"
-                            Foreground="White"
-                            IsCancel="True">
-                            <Button.Style>
-                                <Style TargetType="Button">
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="Transparent" />
-                                        </Trigger>
-                                        <Trigger Property="IsMouseCaptured" Value="True">
-                                            <Setter Property="Background" Value="Transparent" />
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                        </Button>
-                    </DockPanel>
-                    <Grid
-                        Grid.Row="1"
-                        Margin="0,8,0,0"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Stretch">
-                        <TextBlock
-                            x:Name="Message"
-                            Foreground="White"
-                            Text="{Binding Message}" />
-                    </Grid>
-                </Grid>
-            </Border>
-            <ControlTemplate.Triggers>
-                <EventTrigger RoutedEvent="Loaded">
-                    <EventTrigger.Actions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation
-                                    Storyboard.TargetProperty="Opacity"
-                                    From="0"
-                                    To="0.8"
-                                    Duration="0:0:1.5" />
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger.Actions>
-                </EventTrigger>
-            </ControlTemplate.Triggers>
-        </ControlTemplate>
-    </UserControl.Template>
+    <!-- <UserControl.Template> -->
+    <!--     <ControlTemplate TargetType="UserControl"> -->
+    <!--  <Border  -->
+    <!--  Width="{TemplateBinding Width}"  -->
+    <!--  Height="{TemplateBinding Height}"  -->
+    <!--  Padding="{TemplateBinding Padding}"  -->
+    <!--  Background="{TemplateBinding Background}"  -->
+    <!--  CornerRadius="5"  -->
+    <!--  Opacity="{TemplateBinding Opacity}">  -->
+    <!--             <Grid> -->
+    <!--                 <Grid.RowDefinitions> -->
+    <!--                     <RowDefinition Height="Auto" /> -->
+    <!--                     <RowDefinition Height="*" /> -->
+    <!--                 </Grid.RowDefinitions> -->
+    <!--  <DockPanel  -->
+    <!--  x:Name="Header"  -->
+    <!--  Grid.Row="0"  -->
+    <!--  LastChildFill="False">  -->
+    <!--                     <Image DockPanel.Dock="Left" /> -->
+    <!--                     <TextBlock DockPanel.Dock="Left" Text="{Binding Title}" /> -->
+    <!--  <Button  -->
+    <!--  Padding="2"  -->
+    <!--  Background="Transparent"  -->
+    <!--  BorderThickness="0"  -->
+    <!--  Content="✖"  -->
+    <!--  DockPanel.Dock="Right"  -->
+    <!--  Foreground="White"  -->
+    <!--  IsCancel="True">  -->
+    <!--                         <Button.Style> -->
+    <!--                             <Style TargetType="Button"> -->
+    <!--                                 <Style.Triggers> -->
+    <!--                                     <Trigger Property="IsMouseOver" Value="True"> -->
+    <!--                                         <Setter Property="Background" Value="Transparent" /> -->
+    <!--                                     </Trigger> -->
+    <!--                                     <Trigger Property="IsMouseCaptured" Value="True"> -->
+    <!--                                         <Setter Property="Background" Value="Transparent" /> -->
+    <!--                                     </Trigger> -->
+    <!--                                 </Style.Triggers> -->
+    <!--                             </Style> -->
+    <!--                         </Button.Style> -->
+    <!--                     </Button> -->
+    <!--                 </DockPanel> -->
+    <!--  <Grid  -->
+    <!--  Grid.Row="1"  -->
+    <!--  Margin="0,8,0,0"  -->
+    <!--  HorizontalAlignment="Center"  -->
+    <!--  VerticalAlignment="Stretch">  -->
+    <!--  <TextBlock  -->
+    <!--  x:Name="Message"  -->
+    <!--  Foreground="White"  -->
+    <!--  Text="{Binding Message}" />  -->
+    <!--                 </Grid> -->
+    <!--             </Grid> -->
+    <!--         </Border> -->
+    <!--         <ControlTemplate.Triggers> -->
+    <!--             <EventTrigger RoutedEvent="Loaded"> -->
+    <!--                 <EventTrigger.Actions> -->
+    <!--                     <BeginStoryboard> -->
+    <!--                         <Storyboard> -->
+    <!--  <DoubleAnimation  -->
+    <!--  Storyboard.TargetProperty="Opacity"  -->
+    <!--  From="0"  -->
+    <!--  To="0.8"  -->
+    <!--  Duration="0:0:1.5" />  -->
+    <!--                         </Storyboard> -->
+    <!--                     </BeginStoryboard> -->
+    <!--                 </EventTrigger.Actions> -->
+    <!--             </EventTrigger> -->
+    <!--         </ControlTemplate.Triggers> -->
+    <!--     </ControlTemplate> -->
+    <!-- </UserControl.Template> -->
     <UserControl.Triggers />
-    <Grid />
+    <Grid>
+
+        <TextBlock
+            x:Name="Message"
+            Foreground="Black"
+            Text="{Binding Message}" />
+    </Grid>
 </UserControl>
