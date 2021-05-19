@@ -10,7 +10,7 @@
     Icon="{StaticResource WindowIcon}"
     Opacity="0.8"
     ResizeMode="NoResize"
-    WindowStartupLocation="CenterScreen"
+    WindowStartupLocation="CenterOwner"
     WindowStyle="None"
     mc:Ignorable="d">
     <Window.Resources>
@@ -21,28 +21,32 @@
         </ResourceDictionary>
     </Window.Resources>
     <Window.Template>
-        <ControlTemplate>
+        <ControlTemplate TargetType="Window">
             <Border
                 Width="300"
                 Height="200"
                 Padding="{TemplateBinding Padding}"
                 Background="{TemplateBinding Background}"
                 CornerRadius="5"
+                DataContext="{Binding ElementName=ContentPresenter, Path=Content.DataContext}"
                 Opacity="{TemplateBinding Opacity}">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="35" />
+                        <RowDefinition Height="30" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <DockPanel
                         x:Name="Header"
                         Grid.Row="0"
-                        Margin="0,0,0,8"
+                        Height="35"
                         Background="Black"
                         LastChildFill="False"
                         MouseMove="Header_OnMouseMove">
                         <Image DockPanel.Dock="Left" Source="{StaticResource WindowIcon}" />
-                        <TextBlock DockPanel.Dock="Left" Text="{Binding Title}" />
+                        <TextBlock
+                            DockPanel.Dock="Left"
+                            Foreground="White"
+                            Text="{Binding Title}" />
                         <Button
                             Width="30"
                             Padding="2"
@@ -88,7 +92,15 @@
                             </Button.Style>
                         </Button>
                     </DockPanel>
-                    <ContentPresenter Grid.Row="1" />
+                    <!-- <TextBlock Text="111" Grid.Row="1"></TextBlock> -->
+                    <Border Grid.Row="1" Background="Red">
+                        <AdornerDecorator>
+                            <ContentPresenter
+                                x:Name="ContentPresenter"
+                                Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}" />
+                        </AdornerDecorator>
+                    </Border>
                 </Grid>
             </Border>
         </ControlTemplate>

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Common.Bases;
 using Prism.Services.Dialogs;
 
 namespace Common.Views
@@ -20,16 +21,22 @@ namespace Common.Views
     /// </summary>
     public partial class DialogWindow : IDialogWindow
     {
+        public static readonly DependencyProperty ResultProperty = DependencyProperty.Register("Result",
+            typeof(IDialogResult), typeof(IDialogWindow), new PropertyMetadata(null));
+
         public DialogWindow()
         {
             InitializeComponent();
         }
 
-        public IDialogResult Result { get; set; }
+        public IDialogResult Result
+        {
+            get => (IDialogResult)GetValue(ResultProperty);
+            set => SetValue(ResultProperty, value);
+        }
 
         private void Header_OnMouseMove(object sender, MouseEventArgs e)
         {
-
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 this.DragMove();

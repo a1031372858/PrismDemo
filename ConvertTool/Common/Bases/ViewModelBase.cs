@@ -68,6 +68,7 @@ namespace Common.Bases
 
         protected virtual void ViewModel_Close(IDialogResult obj)
         {
+
         }
 
         protected virtual void RegisterEvents()
