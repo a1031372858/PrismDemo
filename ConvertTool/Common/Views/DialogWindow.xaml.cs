@@ -22,7 +22,7 @@ namespace Common.Views
     public partial class DialogWindow : IDialogWindow
     {
         public static readonly DependencyProperty ResultProperty = DependencyProperty.Register("Result",
-            typeof(IDialogResult), typeof(IDialogWindow), new PropertyMetadata(null));
+            typeof(IDialogResult), typeof(DialogWindow), new PropertyMetadata(null));
 
         public DialogWindow()
         {

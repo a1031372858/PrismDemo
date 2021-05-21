@@ -200,6 +200,10 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="ViewModels\GameRankViewModel.cs" />
+    <Compile Include="ViewModels\GamesViewModel.cs" />
+    <Compile Include="Views\GamesView.xaml.cs">
+      <DependentUpon>GamesView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\SnakeViewModel.cs" />
     <Compile Include="Views\GameRankView.xaml.cs">
       <DependentUpon>GameRankView.xaml</DependentUpon>
@@ -232,6 +236,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\GamesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\GameRankView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

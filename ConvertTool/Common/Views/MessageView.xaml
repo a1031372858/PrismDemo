@@ -9,6 +9,8 @@
     Width="300"
     Height="80"
     Padding="5"
+    d:DesignHeight="80"
+    d:DesignWidth="300"
     prism:ViewModelLocator.AutoWireViewModel="True"
     Background="Black"
     FontSize="14"
@@ -90,10 +92,6 @@
     <UserControl.Triggers />
     <Grid>
 
-        <TextBlock
-            x:Name="Message"
-            Background="Blue"
-            Foreground="Black"
-            Text="{Binding Message}" />
+        <TextBlock x:Name="Message" Text="{Binding Message}" />
     </Grid>
 </UserControl>
