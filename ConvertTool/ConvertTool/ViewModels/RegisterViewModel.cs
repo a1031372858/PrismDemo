@@ -96,9 +96,9 @@ namespace ConvertTool.ViewModels
                     UserPassword = Password,
                     BirthDay = DateTime.MinValue,
                     Sex = "1",
-                    CreateUser = 0,
+                    CreateUser = "1",
                     CreateDate = DateTime.Now,
-                    UpdateUser = 0,
+                    UpdateUser = "1",
                     UpdateDate = DateTime.Now,
                 };
                 await context.UserDetail.AddAsync(user);

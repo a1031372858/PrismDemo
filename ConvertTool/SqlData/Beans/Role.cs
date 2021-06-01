@@ -4,6 +4,7 @@ using SqlData.Bases;
 
 namespace SqlData.Beans
 {
+    [Table("role")]
     public class Role:BeanBase
     {
 

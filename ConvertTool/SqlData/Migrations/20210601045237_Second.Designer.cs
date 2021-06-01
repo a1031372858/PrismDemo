@@ -10,8 +10,8 @@ using SqlData;
 namespace SqlData.Migrations
 {
     [DbContext(typeof(PostgreSqlContext))]
-    [Migration("20210511060444_Init_First")]
-    partial class Init_First
+    [Migration("20210601045237_Second")]
+    partial class Second
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,47 @@ namespace SqlData.Migrations
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
                 .HasAnnotation("ProductVersion", "3.1.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            modelBuilder.Entity("SqlData.Beans.Game", b =>
+                {
+                    b.Property<int>("GameId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("game_id")
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnName("create_date")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("CreateUser")
+                        .HasColumnName("create_user")
+                        .HasColumnType("text");
+
+                    b.Property<string>("GameDesc")
+                        .HasColumnName("game_desc")
+                        .HasColumnType("text");
+
+                    b.Property<string>("GameName")
+                        .HasColumnName("game_name")
+                        .HasColumnType("text");
+
+                    b.Property<int>("PlayTotal")
+                        .HasColumnName("play_total")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnName("update_date")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("UpdateUser")
+                        .HasColumnName("update_user")
+                        .HasColumnType("text");
+
+                    b.HasKey("GameId");
+
+                    b.ToTable("game");
+                });
 
             modelBuilder.Entity("SqlData.Beans.Rank", b =>
                 {
@@ -62,6 +103,39 @@ namespace SqlData.Migrations
                     b.ToTable("rank");
                 });
 
+            modelBuilder.Entity("SqlData.Beans.Role", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("role_id")
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnName("create_date")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("CreateUser")
+                        .HasColumnName("create_user")
+                        .HasColumnType("text");
+
+                    b.Property<int>("RoleName")
+                        .HasColumnName("role_name")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnName("update_date")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("UpdateUser")
+                        .HasColumnName("update_user")
+                        .HasColumnType("text");
+
+                    b.HasKey("RoleId");
+
+                    b.ToTable("role");
+                });
+
             modelBuilder.Entity("SqlData.Beans.UserDetail", b =>
                 {
                     b.Property<int>("UserId")
@@ -80,6 +154,10 @@ namespace SqlData.Migrations
 
                     b.Property<string>("CreateUser")
                         .HasColumnName("create_user")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DisplayName")
+                        .HasColumnName("display_name")
                         .HasColumnType("text");
 
                     b.Property<string>("Phone")

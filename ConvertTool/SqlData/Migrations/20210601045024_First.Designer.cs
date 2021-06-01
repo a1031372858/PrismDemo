@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SqlData;
@@ -9,9 +10,10 @@ using SqlData;
 namespace SqlData.Migrations
 {
     [DbContext(typeof(PostgreSqlContext))]
-    partial class PostgreSqlContextModelSnapshot : ModelSnapshot
+    [Migration("20210601045024_First")]
+    partial class First
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,7 +59,7 @@ namespace SqlData.Migrations
 
                     b.HasKey("GameId");
 
-                    b.ToTable("game");
+                    b.ToTable("Game");
                 });
 
             modelBuilder.Entity("SqlData.Beans.Rank", b =>
@@ -131,7 +133,7 @@ namespace SqlData.Migrations
 
                     b.HasKey("RoleId");
 
-                    b.ToTable("role");
+                    b.ToTable("Role");
                 });
 
             modelBuilder.Entity("SqlData.Beans.UserDetail", b =>

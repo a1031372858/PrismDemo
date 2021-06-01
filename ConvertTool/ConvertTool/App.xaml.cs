@@ -35,7 +35,7 @@ namespace ConvertTool
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<LoginMainView>();
-            containerRegistry.Register<DbContext>();
+            containerRegistry.Register<PostgreSqlContext>();
             containerRegistry.RegisterDialog<MessageView>();
             containerRegistry.RegisterDialogWindow<DialogWindow>();
 

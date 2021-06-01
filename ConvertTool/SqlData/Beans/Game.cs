@@ -4,6 +4,7 @@ using SqlData.Bases;
 
 namespace SqlData.Beans
 {
+    [Table("game")]
     public class Game:BeanBase
     {
         [Key]

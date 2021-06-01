@@ -144,9 +144,13 @@
     <Compile Include="Beans\Rank.cs" />
     <Compile Include="Beans\Role.cs" />
     <Compile Include="Beans\UserDetail.cs" />
-    <Compile Include="Migrations\20210511060444_Init_First.cs" />
-    <Compile Include="Migrations\20210511060444_Init_First.designer.cs">
-      <DependentUpon>20210511060444_Init_First.cs</DependentUpon>
+    <Compile Include="Migrations\20210601045024_First.cs" />
+    <Compile Include="Migrations\20210601045024_First.designer.cs">
+      <DependentUpon>20210601045024_First.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20210601045237_Second.cs" />
+    <Compile Include="Migrations\20210601045237_Second.designer.cs">
+      <DependentUpon>20210601045237_Second.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\PostgreSqlContextModelSnapshot.cs" />
     <Compile Include="PostgreSqlContext.cs" />
