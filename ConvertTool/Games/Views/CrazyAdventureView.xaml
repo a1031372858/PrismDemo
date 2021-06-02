@@ -1,0 +1,111 @@
+﻿<Window
+    x:Class="Games.Views.CrazyAdventureView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Games.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="clr-namespace:Games.Model"
+    xmlns:mvvm="http://prismlibrary.com/"
+    Title="小人大冒险"
+    Width="1300"
+    Height="700"
+    mvvm:ViewModelLocator.AutoWireViewModel="True"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <DataTemplate x:Key="ColumnTemplate" DataType="{x:Type model:ChessboardCellModel}">
+            <Border
+                Width="30"
+                Height="30"
+                Background="{Binding CellBackground}"
+                Focusable="False" />
+        </DataTemplate>
+        <DataTemplate x:Key="RowTemplate" DataType="{x:Type model:ChessboardRowModel}">
+            <Border>
+                <ItemsControl
+                    BorderThickness="0"
+                    Focusable="False"
+                    ItemTemplate="{StaticResource ColumnTemplate}"
+                    ItemsSource="{Binding CellList}"
+                    SnapsToDevicePixels="False">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </Border>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <Border
+            Grid.Row="0"
+            HorizontalAlignment="Center"
+            Focusable="False">
+            <WrapPanel>
+                <TextBlock
+                    VerticalAlignment="Center"
+                    FontSize="24"
+                    Text="{Binding GameStatus}" />
+                <Label
+                    VerticalAlignment="Center"
+                    Content="得分："
+                    FontSize="24" />
+                <TextBlock
+                    VerticalAlignment="Center"
+                    FontSize="24"
+                    Text="{Binding Grade}" />
+                <Button
+                    Width="100"
+                    Height="30"
+                    Margin="20,0,0,0"
+                    VerticalAlignment="Center"
+                    Command="{Binding ShowRankViewCommand}"
+                    Content="排行榜"
+                    Focusable="False" />
+            </WrapPanel>
+        </Border>
+        <Border
+            Grid.Row="1"
+            Margin="0,20"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            BorderBrush="Red"
+            BorderThickness="0.5"
+            Focusable="False">
+            <ItemsControl
+                Name="SnakeGame"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                BorderThickness="0"
+                Focusable="False"
+                ItemTemplate="{StaticResource RowTemplate}"
+                ItemsSource="{Binding ChessboardRowList}"
+                SnapsToDevicePixels="False" />
+        </Border>
+        <WrapPanel Grid.Row="2">
+            <Button
+                Width="100"
+                Height="30"
+                Margin="20,0,0,0"
+                VerticalAlignment="Center"
+                Command="{Binding UploadCommand}"
+                Content="上传得分"
+                Focusable="False" />
+            <!--  <Button  -->
+            <!--  Width="100"  -->
+            <!--  Height="30"  -->
+            <!--  Margin="20,0,0,0"  -->
+            <!--  VerticalAlignment="Center"  -->
+            <!--  Command="{Binding LoginCommand}"  -->
+            <!--  Content="前往登录"  -->
+            <!--  Focusable="False" />  -->
+        </WrapPanel>
+    </Grid>
+</Window>

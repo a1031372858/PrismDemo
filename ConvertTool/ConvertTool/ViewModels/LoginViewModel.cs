@@ -95,8 +95,8 @@ namespace ConvertTool.ViewModels
                     {
                         MessageUtility.ShowMessage("登录成功！");
                         GlobalData.LoginUser = loginUser;
-                        Container.Resolve<SnakeView>().Show();
-                        Container.Resolve<LoginMainView>().Close();
+                        DialogService.Show("GamesView");
+                        // Container.Resolve<LoginMainView>().Close();
                     }
                     else
                     {

@@ -37,6 +37,7 @@ namespace ConvertTool
             containerRegistry.RegisterSingleton<LoginMainView>();
             containerRegistry.Register<PostgreSqlContext>();
             containerRegistry.RegisterDialog<MessageView>();
+            containerRegistry.RegisterDialog<GamesView>();
             containerRegistry.RegisterDialogWindow<DialogWindow>();
 
             var container = new UnityContainer();

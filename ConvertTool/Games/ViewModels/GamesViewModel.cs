@@ -1,5 +1,7 @@
 ﻿using Common.Bases;
+using Games.Views;
 using Prism.Commands;
+using Prism.Ioc;
 
 namespace Games.ViewModels
 {
@@ -21,12 +23,12 @@ namespace Games.ViewModels
 
         private void OpenGame2()
         {
-            // DialogService.ShowDialog();
+            Container.Resolve<CrazyAdventureView>().Show();
         }
 
         private void OpenSnake()
         {
-
+            Container.Resolve<SnakeView>().Show();
         }
     }
 }
