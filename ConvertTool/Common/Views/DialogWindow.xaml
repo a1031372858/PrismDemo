@@ -6,13 +6,16 @@
     xmlns:local="clr-namespace:Common.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="{Binding Title}"
+    Width="500"
+    Height="400"
     AllowsTransparency="True"
+    Background="White"
+    Foreground="Black"
     Icon="{StaticResource WindowIcon}"
-    Opacity="0.8"
     ResizeMode="NoResize"
-    ShowInTaskbar="False"
+    ShowInTaskbar="True"
     SizeToContent="WidthAndHeight"
-    WindowStartupLocation="CenterOwner"
+    WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     mc:Ignorable="d">
     <Window.Resources>
@@ -32,7 +35,7 @@
                 CornerRadius="5"
                 DataContext="{Binding ElementName=ContentPresenter, Path=Content.DataContext}"
                 Opacity="{TemplateBinding Opacity}">
-                <Grid>
+                <Grid Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="35" />
                         <RowDefinition Height="*" />
@@ -41,18 +44,21 @@
                         x:Name="Header"
                         Grid.Row="0"
                         Height="35"
-                        Background="Black"
+                        Background="{TemplateBinding Background}"
                         LastChildFill="False"
                         MouseMove="Header_OnMouseMove">
-                        <Image DockPanel.Dock="Left" Source="{TemplateBinding Icon}" />
+                        <Image
+                            Margin="5"
+                            DockPanel.Dock="Left"
+                            Source="{TemplateBinding Icon}" />
                         <TextBlock
                             VerticalAlignment="Center"
                             DockPanel.Dock="Left"
                             FontSize="18"
-                            Foreground="White"
+                            Foreground="{TemplateBinding Foreground}"
                             Text="{Binding Title}" />
                         <Button
-                            Width="30"
+                            Width="35"
                             Padding="2"
                             Background="Transparent"
                             BorderThickness="0"
@@ -61,7 +67,7 @@
                             IsCancel="True">
                             <Button.Style>
                                 <Style TargetType="Button">
-                                    <Setter Property="Foreground" Value="White" />
+                                    <Setter Property="Foreground" Value="Black" />
                                     <Style.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
                                             <Setter Property="Background" Value="Transparent" />
@@ -77,15 +83,16 @@
                         </Button>
 
                         <Button
-                            Width="30"
+                            Width="35"
                             Padding="2"
                             Background="Transparent"
                             BorderThickness="0"
+                            Click="ButtonBase_OnClick"
                             Content="_"
                             DockPanel.Dock="Right">
                             <Button.Style>
                                 <Style TargetType="Button">
-                                    <Setter Property="Foreground" Value="White" />
+                                    <Setter Property="Foreground" Value="Black" />
                                     <Style.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
                                             <Setter Property="Background" Value="Transparent" />
@@ -100,17 +107,102 @@
                             </Button.Style>
                         </Button>
                     </DockPanel>
-                    <Border Grid.Row="1" Background="Black">
-                        <ContentPresenter
-                            x:Name="ContentPresenter"
-                            Content="{TemplateBinding Content}"
-                            ContentTemplate="{TemplateBinding ContentTemplate}" />
-                    </Border>
+                    <Canvas Grid.Row="1">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter
+                                x:Name="ContentPresenter"
+                                Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}" />
+                        </Border>
+                        <Thumb
+                            x:Name="BlackMessageBox"
+                            Canvas.Left="0"
+                            Canvas.Top="0"
+                            Width="300"
+                            Height="Auto"
+                            MinHeight="95"
+                            DragDelta="BlackMessageBox_OnDragDelta"
+                            Loaded="BlackMessageBox_OnLoaded">
+                            <Thumb.Template>
+                                <ControlTemplate>
+                                    <Border
+                                        Background="Black"
+                                        CornerRadius="5"
+                                        KeyDown="BlackMessageBox_OnKeyDown"
+                                        Opacity="0.6">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="35" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <!--  Header  -->
+                                            <Border
+                                                x:Name="MessageHeader"
+                                                Grid.Row="0"
+                                                Height="35">
+                                                <DockPanel LastChildFill="False">
+                                                    <TextBlock
+                                                        VerticalAlignment="Center"
+                                                        DockPanel.Dock="Left"
+                                                        FontSize="18"
+                                                        Foreground="White"
+                                                        Text="" />
+                                                    <Button
+                                                        x:Name="MessageCloseBtn"
+                                                        Width="30"
+                                                        Padding="2"
+                                                        Background="Transparent"
+                                                        BorderThickness="0"
+                                                        Click="MessageCloseBtn_OnClick"
+                                                        Content="✖"
+                                                        DockPanel.Dock="Right">
+                                                        <Button.Style>
+                                                            <Style TargetType="Button">
+                                                                <Setter Property="Foreground" Value="White" />
+                                                                <Style.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter Property="Background" Value="Transparent" />
+                                                                        <Setter Property="Foreground" Value="Black" />
+                                                                    </Trigger>
+                                                                    <Trigger Property="IsMouseCaptured" Value="True">
+                                                                        <Setter Property="Background" Value="Transparent" />
+                                                                        <Setter Property="Foreground" Value="Black" />
+                                                                    </Trigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Button.Style>
+                                                    </Button>
+                                                </DockPanel>
+                                            </Border>
+                                            <!--  Body  -->
+                                            <Border
+                                                x:Name="MessageBody"
+                                                Grid.Row="1"
+                                                Height="Auto"
+                                                MinHeight="60"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Top">
+                                                <TextBlock
+                                                    Padding="10"
+                                                    VerticalAlignment="Top"
+                                                    FontSize="16"
+                                                    Foreground="White"
+                                                    Text="密码错误!213213213215435435467456812212145897456123546785154876"
+                                                    TextWrapping="Wrap" />
+                                            </Border>
+                                        </Grid>
+                                    </Border>
+                                </ControlTemplate>
+                            </Thumb.Template>
+                            <Thumb.Style>
+                                <Style TargetType="Thumb">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </Style>
+                            </Thumb.Style>
+                        </Thumb>
+                    </Canvas>
                 </Grid>
             </Border>
         </ControlTemplate>
     </Window.Template>
-    <!-- <Grid> -->
-    <!--     <TextBlock Text="密码错误" /> -->
-    <!-- </Grid> -->
 </Window>

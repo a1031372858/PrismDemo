@@ -34,7 +34,7 @@ namespace ConvertTool
     {
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterSingleton<LoginMainView>();
+            containerRegistry.Register<LoginMainView>();
             containerRegistry.Register<PostgreSqlContext>();
             containerRegistry.RegisterDialog<MessageView>();
             containerRegistry.RegisterDialog<GamesView>();
@@ -57,6 +57,7 @@ namespace ConvertTool
                 MessageUtility.ShowMessage("程序已启动");
                 return null;
             }
+
             return Container.Resolve<LoginMainView>();
         }
 

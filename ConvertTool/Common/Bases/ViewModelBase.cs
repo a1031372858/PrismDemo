@@ -16,7 +16,7 @@ using Prism.Services.Dialogs;
 
 namespace Common.Bases
 {
-    public class ViewModelBase : BindableBase, INotifyDataErrorInfo,IDialogAware
+    public class ViewModelBase : BindableBase, INotifyDataErrorInfo, IDialogAware
     {
 
         public IEventAggregator EventAggregator { get; }
@@ -46,13 +46,30 @@ namespace Common.Bases
             }
         }
 
-        private string _title;
+        private string _title = string.Empty;
 
         public string Title
         {
             set => SetProperty(ref _title, value);
             get => _title;
         }
+
+        private string _tipsMessage = string.Empty;
+
+        public string TipsMessage
+        {
+            set => SetProperty(ref _tipsMessage, value);
+            get => _tipsMessage;
+        }
+
+        private Visibility _messageBoxVisibility = Visibility.Collapsed;
+
+        public Visibility MessageBoxVisibility
+        {
+            set => SetProperty(ref _messageBoxVisibility, value);
+            get => _messageBoxVisibility;
+        }
+
 
         protected ViewModelBase()
         {
@@ -66,39 +83,28 @@ namespace Common.Bases
             Init();
         }
 
-        protected virtual void ViewModel_Close(IDialogResult obj)
-        {
+        protected virtual void ViewModel_Close(IDialogResult obj) { }
 
-        }
 
-        protected virtual void RegisterEvents()
-        {
+        /// <summary>
+        /// 1注册属性
+        /// </summary>
+        protected virtual void RegisterProperties() { }
 
-        }
+        /// <summary>
+        /// 2注册命令
+        /// </summary>
+        protected virtual void RegisterCommands() { }
 
-        protected virtual void RegisterProperties()
-        {
-            var className = this.GetType().Name;
-            if (className.EndsWith(TitleName.SuffixName))
-            {
-                var fieldName = $"{className.Substring(0, className.Length - TitleName.SuffixName.Length)}Name";
-                if (typeof(TitleName).GetField(fieldName, BindingFlags.Public| BindingFlags.Static)?.GetValue(null) is string titleName)
-                {
-                    Title = titleName;
-                }
-                else
-                {
-                    Title = string.Empty;
-                }
-            }
-        }
+        /// <summary>
+        /// 3注册事件
+        /// </summary>
+        protected virtual void RegisterEvents() { }
 
-        protected virtual void RegisterCommands() {}
-
-        protected virtual void Init()
-        {
-
-        }
+        /// <summary>
+        /// 4数据初始化
+        /// </summary>
+        protected virtual void Init() { }
 
         public void OnErrorsChanged(string propertyName)
         {
@@ -126,10 +132,7 @@ namespace Common.Bases
             DialogOpened(parameters);
         }
 
-        protected virtual void DialogOpened(IDialogParameters parameters)
-        {
-
-        }
+        protected virtual void DialogOpened(IDialogParameters parameters) { }
 
     }
 }

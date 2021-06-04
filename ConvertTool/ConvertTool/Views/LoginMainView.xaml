@@ -5,11 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
-    Title="{Binding Title}"
     Width="500"
-    Height="600"
     prism:ViewModelLocator.AutoWireViewModel="True"
-    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Window.Resources>
         <!--  <cm:BackgroundWorker  -->
@@ -139,6 +136,7 @@
                     Grid.Column="2"
                     Height="30"
                     VerticalContentAlignment="Center"
+                    KeyDown="UIElement_OnKeyDown"
                     Text="{Binding RegisterViewModel.Phone}" />
                 <Label
                     Grid.Row="2"
@@ -146,10 +144,12 @@
                     Height="30"
                     Content="密码" />
                 <TextBox
+                    x:Name="PasswordTextBox"
                     Grid.Row="2"
                     Grid.Column="2"
                     Height="30"
                     VerticalContentAlignment="Center"
+                    KeyDown="PasswordTextBox2_OnKeyDown"
                     Text="{Binding RegisterViewModel.Password}" />
                 <Label
                     Grid.Row="3"
@@ -157,10 +157,12 @@
                     Height="30"
                     Content="再次输入" />
                 <TextBox
+                    x:Name="CheckTextBox"
                     Grid.Row="3"
                     Grid.Column="2"
                     Height="30"
                     VerticalContentAlignment="Center"
+                    KeyDown="CheckTextBox_OnKeyDown"
                     Text="{Binding RegisterViewModel.CheckPassword}" />
                 <DockPanel
                     Grid.Row="4"
@@ -174,6 +176,7 @@
                         Content="返回登录"
                         DockPanel.Dock="Left" />
                     <Button
+                        x:Name="RegisterBtn"
                         Height="30"
                         MinWidth="70"
                         Command="{Binding RegisterViewModel.RegisterCommand}"
