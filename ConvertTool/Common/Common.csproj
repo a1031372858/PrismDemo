@@ -151,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\icon.jpg" />
+    <Resource Include="Images\favicon.ico" />
     <Content Include="Images\mate10.jpg" />
     <Content Include="Images\systemIcon.JPG" />
   </ItemGroup>

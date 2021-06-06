@@ -9,15 +9,15 @@ namespace SqlData.Bases
         {
             UpdateDate=DateTime.Now;
             CreateDate=DateTime.Now;
-            UpdateUser = "1";
-            CreateUser = "1";
+            UpdateUser = 1;
+            CreateUser = 1;
         }
         [Column("update_user")]
-        public string UpdateUser { set; get; }
+        public int UpdateUser { set; get; }
         [Column("update_date")]
         public DateTime UpdateDate { set; get; }
         [Column("create_user")]
-        public string CreateUser { set; get; }
+        public int CreateUser { set; get; }
         [Column("create_date")]
         public DateTime CreateDate { set; get; }
     }

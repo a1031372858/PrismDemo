@@ -7,6 +7,8 @@
     xmlns:prism="http://prismlibrary.com/"
     Width="500"
     prism:ViewModelLocator.AutoWireViewModel="True"
+    Icon="{StaticResource WindowIcon}"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Window.Resources>
         <!--  <cm:BackgroundWorker  -->

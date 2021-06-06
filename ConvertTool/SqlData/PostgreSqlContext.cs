@@ -14,11 +14,11 @@ namespace SqlData
     {
         private const string Port = "5432";
         private const string DbName = "usermanager";
-         // private const string Host = "localhost";
-        private const string Host = "192.168.1.88";
+         private const string Host = "localhost";
+        // private const string Host = "192.168.1.88";
+        private const string Password = "666666";
+        // private const string Password = "root";
         private const string UserId = "postgres";
-        // private const string Password = "666666";
-        private const string Password = "root";
 
         // private readonly ILoggerFactory _factory;
         //
