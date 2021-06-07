@@ -10,8 +10,8 @@ using SqlData;
 namespace SqlData.Migrations
 {
     [DbContext(typeof(PostgreSqlContext))]
-    [Migration("20210601045024_First")]
-    partial class First
+    [Migration("20210607012107_Version0.1")]
+    partial class Version01
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,9 +33,9 @@ namespace SqlData.Migrations
                         .HasColumnName("create_date")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("CreateUser")
+                    b.Property<int>("CreateUser")
                         .HasColumnName("create_user")
-                        .HasColumnType("text");
+                        .HasColumnType("integer");
 
                     b.Property<string>("GameDesc")
                         .HasColumnName("game_desc")
@@ -53,13 +53,13 @@ namespace SqlData.Migrations
                         .HasColumnName("update_date")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("UpdateUser")
+                    b.Property<int>("UpdateUser")
                         .HasColumnName("update_user")
-                        .HasColumnType("text");
+                        .HasColumnType("integer");
 
                     b.HasKey("GameId");
 
-                    b.ToTable("Game");
+                    b.ToTable("game");
                 });
 
             modelBuilder.Entity("SqlData.Beans.Rank", b =>
@@ -74,9 +74,9 @@ namespace SqlData.Migrations
                         .HasColumnName("create_date")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("CreateUser")
+                    b.Property<int>("CreateUser")
                         .HasColumnName("create_user")
-                        .HasColumnType("text");
+                        .HasColumnType("integer");
 
                     b.Property<int>("GameId")
                         .HasColumnName("game_id")
@@ -90,9 +90,9 @@ namespace SqlData.Migrations
                         .HasColumnName("update_date")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("UpdateUser")
+                    b.Property<int>("UpdateUser")
                         .HasColumnName("update_user")
-                        .HasColumnType("text");
+                        .HasColumnType("integer");
 
                     b.Property<int>("UserId")
                         .HasColumnName("user_id")
@@ -115,9 +115,9 @@ namespace SqlData.Migrations
                         .HasColumnName("create_date")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("CreateUser")
+                    b.Property<int>("CreateUser")
                         .HasColumnName("create_user")
-                        .HasColumnType("text");
+                        .HasColumnType("integer");
 
                     b.Property<int>("RoleName")
                         .HasColumnName("role_name")
@@ -127,13 +127,13 @@ namespace SqlData.Migrations
                         .HasColumnName("update_date")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("UpdateUser")
+                    b.Property<int>("UpdateUser")
                         .HasColumnName("update_user")
-                        .HasColumnType("text");
+                        .HasColumnType("integer");
 
                     b.HasKey("RoleId");
 
-                    b.ToTable("Role");
+                    b.ToTable("role");
                 });
 
             modelBuilder.Entity("SqlData.Beans.UserDetail", b =>
@@ -152,9 +152,9 @@ namespace SqlData.Migrations
                         .HasColumnName("create_date")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("CreateUser")
+                    b.Property<int>("CreateUser")
                         .HasColumnName("create_user")
-                        .HasColumnType("text");
+                        .HasColumnType("integer");
 
                     b.Property<string>("DisplayName")
                         .HasColumnName("display_name")
@@ -172,9 +172,9 @@ namespace SqlData.Migrations
                         .HasColumnName("update_date")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("UpdateUser")
+                    b.Property<int>("UpdateUser")
                         .HasColumnName("update_user")
-                        .HasColumnType("text");
+                        .HasColumnType("integer");
 
                     b.Property<string>("UserPassword")
                         .HasColumnName("user_password")

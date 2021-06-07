@@ -122,7 +122,8 @@
                             Height="Auto"
                             MinHeight="95"
                             DragDelta="BlackMessageBox_OnDragDelta"
-                            Loaded="BlackMessageBox_OnLoaded">
+                            Loaded="BlackMessageBox_OnLoaded"
+                            Visibility="Visible">
                             <Thumb.Template>
                                 <ControlTemplate>
                                     <Border

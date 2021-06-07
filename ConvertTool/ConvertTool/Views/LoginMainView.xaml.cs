@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Common.Bases;
 using Common.Views;
 using ConvertTool.ViewModels;
 
@@ -19,7 +20,7 @@ namespace ConvertTool.Views
     /// <summary>
     /// LoginView.xaml 的交互逻辑
     /// </summary>
-    public partial class LoginMainView : Window
+    public partial class LoginMainView : MyWindow
     {
 
         public LoginMainView()

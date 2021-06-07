@@ -9,6 +9,7 @@ using System.Windows;
 using Common.Constants;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
+using Prism.Commands;
 using Prism.Events;
 using Prism.Ioc;
 using Prism.Mvvm;
@@ -62,7 +63,7 @@ namespace Common.Bases
             get => _tipsMessage;
         }
 
-        private Visibility _messageBoxVisibility = Visibility.Collapsed;
+        private Visibility _messageBoxVisibility = Visibility.Visible;
 
         public Visibility MessageBoxVisibility
         {
@@ -70,6 +71,9 @@ namespace Common.Bases
             get => _messageBoxVisibility;
         }
 
+        public DelegateCommand EscCommand { set; get; }
+        public DelegateCommand MessageCloseCommand { set; get; }
+        
 
         protected ViewModelBase()
         {
@@ -77,10 +81,27 @@ namespace Common.Bases
             Container = ServiceLocator.Current.GetInstance<IContainerProvider>();
             DialogService = Container.Resolve<IDialogService>();
             RequestClose += ViewModel_Close;
+            RegisterBaseCommands();
             RegisterProperties();
             RegisterCommands();
             RegisterEvents();
             Init();
+        }
+
+        private void RegisterBaseCommands()
+        {
+            EscCommand=new DelegateCommand(ExitMethod);
+            MessageCloseCommand = new DelegateCommand(CloseMessage);
+        }
+
+        private void CloseMessage()
+        {
+            MessageBoxVisibility = Visibility.Collapsed;
+        }
+
+        private void ExitMethod()
+        {
+            OnDialogClosed();
         }
 
         protected virtual void ViewModel_Close(IDialogResult obj) { }
@@ -134,5 +155,10 @@ namespace Common.Bases
 
         protected virtual void DialogOpened(IDialogParameters parameters) { }
 
+        protected void ShowMessage(string msg)
+        {
+            TipsMessage = msg;
+            MessageBoxVisibility = Visibility.Visible;
+        }
     }
 }

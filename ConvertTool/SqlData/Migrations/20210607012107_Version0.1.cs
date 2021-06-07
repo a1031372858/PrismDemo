@@ -4,19 +4,19 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace SqlData.Migrations
 {
-    public partial class First : Migration
+    public partial class Version01 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Game",
+                name: "game",
                 columns: table => new
                 {
                     game_id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    update_user = table.Column<string>(nullable: true),
+                    update_user = table.Column<int>(nullable: false),
                     update_date = table.Column<DateTime>(nullable: false),
-                    create_user = table.Column<string>(nullable: true),
+                    create_user = table.Column<int>(nullable: false),
                     create_date = table.Column<DateTime>(nullable: false),
                     game_name = table.Column<string>(nullable: true),
                     game_desc = table.Column<string>(nullable: true),
@@ -24,7 +24,7 @@ namespace SqlData.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Game", x => x.game_id);
+                    table.PrimaryKey("PK_game", x => x.game_id);
                 });
 
             migrationBuilder.CreateTable(
@@ -33,9 +33,9 @@ namespace SqlData.Migrations
                 {
                     rank_id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    update_user = table.Column<string>(nullable: true),
+                    update_user = table.Column<int>(nullable: false),
                     update_date = table.Column<DateTime>(nullable: false),
-                    create_user = table.Column<string>(nullable: true),
+                    create_user = table.Column<int>(nullable: false),
                     create_date = table.Column<DateTime>(nullable: false),
                     user_id = table.Column<int>(nullable: false),
                     game_id = table.Column<int>(nullable: false),
@@ -47,20 +47,20 @@ namespace SqlData.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Role",
+                name: "role",
                 columns: table => new
                 {
                     role_id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    update_user = table.Column<string>(nullable: true),
+                    update_user = table.Column<int>(nullable: false),
                     update_date = table.Column<DateTime>(nullable: false),
-                    create_user = table.Column<string>(nullable: true),
+                    create_user = table.Column<int>(nullable: false),
                     create_date = table.Column<DateTime>(nullable: false),
                     role_name = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Role", x => x.role_id);
+                    table.PrimaryKey("PK_role", x => x.role_id);
                 });
 
             migrationBuilder.CreateTable(
@@ -69,9 +69,9 @@ namespace SqlData.Migrations
                 {
                     user_id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    update_user = table.Column<string>(nullable: true),
+                    update_user = table.Column<int>(nullable: false),
                     update_date = table.Column<DateTime>(nullable: false),
-                    create_user = table.Column<string>(nullable: true),
+                    create_user = table.Column<int>(nullable: false),
                     create_date = table.Column<DateTime>(nullable: false),
                     phone = table.Column<string>(nullable: true),
                     user_password = table.Column<string>(nullable: true),
@@ -88,13 +88,13 @@ namespace SqlData.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Game");
+                name: "game");
 
             migrationBuilder.DropTable(
                 name: "rank");
 
             migrationBuilder.DropTable(
-                name: "Role");
+                name: "role");
 
             migrationBuilder.DropTable(
                 name: "user_detail");

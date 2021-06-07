@@ -31,9 +31,9 @@ namespace SqlData.Migrations
                         .HasColumnName("create_date")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("CreateUser")
+                    b.Property<int>("CreateUser")
                         .HasColumnName("create_user")
-                        .HasColumnType("text");
+                        .HasColumnType("integer");
 
                     b.Property<string>("GameDesc")
                         .HasColumnName("game_desc")
@@ -51,9 +51,9 @@ namespace SqlData.Migrations
                         .HasColumnName("update_date")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("UpdateUser")
+                    b.Property<int>("UpdateUser")
                         .HasColumnName("update_user")
-                        .HasColumnType("text");
+                        .HasColumnType("integer");
 
                     b.HasKey("GameId");
 
@@ -72,9 +72,9 @@ namespace SqlData.Migrations
                         .HasColumnName("create_date")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("CreateUser")
+                    b.Property<int>("CreateUser")
                         .HasColumnName("create_user")
-                        .HasColumnType("text");
+                        .HasColumnType("integer");
 
                     b.Property<int>("GameId")
                         .HasColumnName("game_id")
@@ -88,9 +88,9 @@ namespace SqlData.Migrations
                         .HasColumnName("update_date")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("UpdateUser")
+                    b.Property<int>("UpdateUser")
                         .HasColumnName("update_user")
-                        .HasColumnType("text");
+                        .HasColumnType("integer");
 
                     b.Property<int>("UserId")
                         .HasColumnName("user_id")
@@ -113,9 +113,9 @@ namespace SqlData.Migrations
                         .HasColumnName("create_date")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("CreateUser")
+                    b.Property<int>("CreateUser")
                         .HasColumnName("create_user")
-                        .HasColumnType("text");
+                        .HasColumnType("integer");
 
                     b.Property<int>("RoleName")
                         .HasColumnName("role_name")
@@ -125,9 +125,9 @@ namespace SqlData.Migrations
                         .HasColumnName("update_date")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("UpdateUser")
+                    b.Property<int>("UpdateUser")
                         .HasColumnName("update_user")
-                        .HasColumnType("text");
+                        .HasColumnType("integer");
 
                     b.HasKey("RoleId");
 
@@ -150,9 +150,9 @@ namespace SqlData.Migrations
                         .HasColumnName("create_date")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("CreateUser")
+                    b.Property<int>("CreateUser")
                         .HasColumnName("create_user")
-                        .HasColumnType("text");
+                        .HasColumnType("integer");
 
                     b.Property<string>("DisplayName")
                         .HasColumnName("display_name")
@@ -170,9 +170,9 @@ namespace SqlData.Migrations
                         .HasColumnName("update_date")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("UpdateUser")
+                    b.Property<int>("UpdateUser")
                         .HasColumnName("update_user")
-                        .HasColumnType("text");
+                        .HasColumnType("integer");
 
                     b.Property<string>("UserPassword")
                         .HasColumnName("user_password")
