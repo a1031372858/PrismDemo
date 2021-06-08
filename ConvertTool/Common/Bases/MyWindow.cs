@@ -30,13 +30,21 @@ namespace Common.Bases
                 minButton.Click += MinButton_OnClick;
             }
 
+            if (GetTemplateChild("CloseButton") is Button closeButton)
+            {
+                closeButton.Click += CloseButton_Click;
+            }
             if (GetTemplateChild("BlackMessageBox") is Thumb blackMessageBox)
             {
                 blackMessageBox.DragDelta += BlackMessageBox_OnDragDelta;
             }
-
+            
         }
 
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
 
         private void BlackMessageBox_OnDragDelta(object sender, DragDeltaEventArgs e)
         {
@@ -71,7 +79,7 @@ namespace Common.Bases
 
         private void MinButton_OnClick(object sender, RoutedEventArgs e)
         {
-            // this.WindowState = WindowState.Minimized;
+            this.WindowState = WindowState.Minimized;
         }
 
         private void Header_OnMouseMove(object sender, MouseEventArgs e)

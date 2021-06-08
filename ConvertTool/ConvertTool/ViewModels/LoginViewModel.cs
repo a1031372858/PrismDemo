@@ -93,19 +93,19 @@ namespace ConvertTool.ViewModels
                 {
                     if (loginUser.UserPassword == Password)
                     {
-                        ShowMessage("登录成功！");
+                        ParentViewModel.ShowMessage("登录成功！");
                         GlobalData.LoginUser = loginUser;
-                        // DialogService.Show("GamesView");
-                        // Container.Resolve<LoginMainView>().Close();
+                        DialogService.Show("GamesView");
+                        Container.Resolve<LoginMainView>().Close();
                     }
                     else
                     {
-                        ShowMessage("用户名或密码错误！");
+                        ParentViewModel.ShowMessage("用户名或密码错误！");
                     }
                 }
                 else
                 {
-                    ShowMessage("该用户不存在！");
+                    ParentViewModel.ShowMessage("该用户不存在！");
                 }
                 
 
@@ -125,7 +125,7 @@ namespace ConvertTool.ViewModels
             }
             else
             {
-                ShowMessage("用户名或密码不能为空！");
+                ParentViewModel.ShowMessage("用户名或密码不能为空！");
             }
         }
         private void UpdatePassword()

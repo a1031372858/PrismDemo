@@ -155,7 +155,7 @@ namespace Common.Bases
 
         protected virtual void DialogOpened(IDialogParameters parameters) { }
 
-        protected void ShowMessage(string msg)
+        public void ShowMessage(string msg)
         {
             TipsMessage = msg;
             MessageBoxVisibility = Visibility.Visible;

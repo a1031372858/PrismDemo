@@ -9,14 +9,15 @@
 
     <ControlTemplate x:Key="MyWindowTemplate" TargetType="bases:MyWindow">
         <Border
+            x:Name="WindowBorder"
             Width="{TemplateBinding Width}"
             Height="{TemplateBinding Height}"
-            Padding="{TemplateBinding Padding}"
+            MinWidth="{TemplateBinding MinWidth}"
+            MinHeight="{TemplateBinding MinHeight}"
             Background="{TemplateBinding Background}"
             CornerRadius="5"
-            DataContext="{Binding ElementName=ContentPresenter, Path=Content.DataContext}"
             Opacity="{TemplateBinding Opacity}">
-            <Grid Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="35" />
                     <RowDefinition Height="*" />
@@ -25,7 +26,7 @@
                     x:Name="Header"
                     Grid.Row="0"
                     Height="35"
-                    Background="{TemplateBinding Background}"
+                    Background="Transparent"
                     LastChildFill="False">
                     <Image
                         Margin="6"
@@ -39,11 +40,12 @@
                         Foreground="{TemplateBinding Foreground}"
                         Text="{Binding Title}" />
                     <Button
+                        x:Name="CloseButton"
                         Width="35"
                         Padding="2"
                         Background="Transparent"
                         BorderThickness="0"
-                        Command="{Binding EscCommand}"
+                        Command="{Binding ElementName=ContentPresenter, Path=Content.DataContext.EscCommand}"
                         Content="✖"
                         DockPanel.Dock="Right"
                         IsCancel="True">
@@ -89,115 +91,126 @@
                         </Button.Style>
                     </Button>
                 </DockPanel>
-                <Canvas Grid.Row="1" HorizontalAlignment="Stretch">
+                <Grid Grid.Row="1" Width="{Binding ElementName=WindowBorder, Path=Width}">
                     <Border
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Center"
-                        Background="{TemplateBinding Background}"
-                        Canvas.ZIndex="1">
+                        HorizontalAlignment="Center"
+                        Panel.ZIndex="1"
+                        Background="{TemplateBinding Background}">
                         <ContentPresenter
                             x:Name="ContentPresenter"
+                            HorizontalAlignment="Center"
                             Content="{TemplateBinding Content}"
                             ContentTemplate="{TemplateBinding ContentTemplate}" />
                     </Border>
-                    <Thumb
-                        x:Name="BlackMessageBox"
-                        Canvas.Left="0"
-                        Canvas.Top="0"
-                        Width="300"
-                        Height="Auto"
-                        MinHeight="95"
-                        Canvas.ZIndex="99"
-                        Visibility="{Binding MessageBoxVisibility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                        <Thumb.Template>
-                            <ControlTemplate>
-                                <Border
-                                    x:Name="Border"
-                                    Background="Black"
-                                    CornerRadius="5"
-                                    Opacity="0.6">
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="35" />
-                                            <RowDefinition Height="Auto" />
-                                        </Grid.RowDefinitions>
-                                        <!--  Header  -->
-                                        <Border
-                                            x:Name="MessageHeader"
-                                            Grid.Row="0"
-                                            Height="35">
-                                            <DockPanel LastChildFill="False">
+                    <Canvas
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Panel.ZIndex="2">
+                        <Thumb
+                            x:Name="BlackMessageBox"
+                            Canvas.Left="0"
+                            Canvas.Top="0"
+                            Width="300"
+                            Height="Auto"
+                            MinHeight="95"
+                            Panel.ZIndex="99"
+                            Visibility="{Binding MessageBoxVisibility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <Thumb.Template>
+                                <ControlTemplate>
+                                    <Border
+                                        x:Name="Border"
+                                        Background="Black"
+                                        CornerRadius="5"
+                                        Opacity="0.6">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="35" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <!--  Header  -->
+                                            <Border
+                                                x:Name="MessageHeader"
+                                                Grid.Row="0"
+                                                Height="35">
+                                                <DockPanel LastChildFill="False">
+                                                    <TextBlock
+                                                        VerticalAlignment="Center"
+                                                        DockPanel.Dock="Left"
+                                                        FontSize="18"
+                                                        Foreground="White"
+                                                        Text="" />
+                                                    <Button
+                                                        x:Name="MessageCloseBtn"
+                                                        Width="30"
+                                                        Padding="2"
+                                                        Background="Transparent"
+                                                        BorderThickness="0"
+                                                        Command="{Binding MessageCloseCommand}"
+                                                        Content="✖"
+                                                        DockPanel.Dock="Right">
+                                                        <Button.Style>
+                                                            <Style TargetType="Button">
+                                                                <Setter Property="Foreground" Value="White" />
+                                                                <Style.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter Property="Background" Value="Transparent" />
+                                                                        <Setter Property="Foreground" Value="Black" />
+                                                                    </Trigger>
+                                                                    <Trigger Property="IsMouseCaptured" Value="True">
+                                                                        <Setter Property="Background" Value="Transparent" />
+                                                                        <Setter Property="Foreground" Value="Black" />
+                                                                    </Trigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Button.Style>
+                                                    </Button>
+                                                </DockPanel>
+                                            </Border>
+                                            <!--  Body  -->
+                                            <Border
+                                                x:Name="MessageBody"
+                                                Grid.Row="1"
+                                                Height="Auto"
+                                                MinHeight="60"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Top">
                                                 <TextBlock
-                                                    VerticalAlignment="Center"
-                                                    DockPanel.Dock="Left"
-                                                    FontSize="18"
+                                                    Padding="10"
+                                                    VerticalAlignment="Top"
+                                                    FontSize="16"
                                                     Foreground="White"
-                                                    Text="" />
-                                                <Button
-                                                    x:Name="MessageCloseBtn"
-                                                    Width="30"
-                                                    Padding="2"
-                                                    Background="Transparent"
-                                                    BorderThickness="0"
-                                                    Command="{Binding MessageCloseCommand}"
-                                                    Content="✖"
-                                                    DockPanel.Dock="Right">
-                                                    <Button.Style>
-                                                        <Style TargetType="Button">
-                                                            <Setter Property="Foreground" Value="White" />
-                                                            <Style.Triggers>
-                                                                <Trigger Property="IsMouseOver" Value="True">
-                                                                    <Setter Property="Background" Value="Transparent" />
-                                                                    <Setter Property="Foreground" Value="Black" />
-                                                                </Trigger>
-                                                                <Trigger Property="IsMouseCaptured" Value="True">
-                                                                    <Setter Property="Background" Value="Transparent" />
-                                                                    <Setter Property="Foreground" Value="Black" />
-                                                                </Trigger>
-                                                            </Style.Triggers>
-                                                        </Style>
-                                                    </Button.Style>
-                                                </Button>
-                                            </DockPanel>
-                                        </Border>
-                                        <!--  Body  -->
-                                        <Border
-                                            x:Name="MessageBody"
-                                            Grid.Row="1"
-                                            Height="Auto"
-                                            MinHeight="60"
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Top">
-                                            <TextBlock
-                                                Padding="10"
-                                                VerticalAlignment="Top"
-                                                FontSize="16"
-                                                Foreground="White"
-                                                Text="{Binding TipsMessage}"
-                                                TextWrapping="Wrap" />
-                                        </Border>
-                                    </Grid>
-                                    <!-- <Border.Style> -->
-                                    <!--     <Style TargetType="Border"> -->
-                                    <!--         <Setter Property="Visibility" Value="{Binding MessageBoxVisibility}" /> -->
-                                    <!--     </Style> -->
-                                    <!-- </Border.Style> -->
-                                </Border>
-                            </ControlTemplate>
-                        </Thumb.Template>
-                    </Thumb>
-                </Canvas>
+                                                    Text="{Binding TipsMessage}"
+                                                    TextWrapping="Wrap" />
+                                            </Border>
+                                        </Grid>
+                                        <!-- <Border.Style> -->
+                                        <!--     <Style TargetType="Border"> -->
+                                        <!--         <Setter Property="Visibility" Value="{Binding MessageBoxVisibility}" /> -->
+                                        <!--     </Style> -->
+                                        <!-- </Border.Style> -->
+                                    </Border>
+                                </ControlTemplate>
+                            </Thumb.Template>
+                        </Thumb>
+                    </Canvas>
+                    <ResizeGrip
+                        x:Name="WindowResizeGrip"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        IsTabStop="false"
+                        Visibility="Visible" />
+                </Grid>
             </Grid>
         </Border>
     </ControlTemplate>
 
+
     <Style x:Key="MyWindowStyle" TargetType="{x:Type bases:MyWindow}">
         <Setter Property="Icon" Value="{StaticResource WindowIcon}" />
         <Setter Property="WindowStyle" Value="None" />
-        <Setter Property="ResizeMode" Value="CanResize" />
-        <Setter Property="AllowsTransparency" Value="True" />
+        <!-- <Setter Property="AllowsTransparency" Value="True" /> -->
         <Setter Property="ShowInTaskbar" Value="True" />
-        <Setter Property="SizeToContent" Value="WidthAndHeight" />
+        <Setter Property="SizeToContent" Value="Manual" />
         <Setter Property="Template" Value="{StaticResource MyWindowTemplate}" />
     </Style>
 
