@@ -20,7 +20,7 @@ namespace Common.Views
     /// <summary>
     /// DialogWindow.xaml の相互作用ロジック
     /// </summary>
-    public partial class DialogWindow : IDialogWindow
+    public partial class DialogWindow : MyWindow,IDialogWindow
     {
         public static readonly DependencyProperty ResultProperty = DependencyProperty.Register("Result",
             typeof(IDialogResult), typeof(DialogWindow), new PropertyMetadata(null));

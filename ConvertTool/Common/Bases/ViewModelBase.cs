@@ -63,7 +63,7 @@ namespace Common.Bases
             get => _tipsMessage;
         }
 
-        private Visibility _messageBoxVisibility = Visibility.Visible;
+        private Visibility _messageBoxVisibility = Visibility.Collapsed;
 
         public Visibility MessageBoxVisibility
         {

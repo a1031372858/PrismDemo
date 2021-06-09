@@ -53,7 +53,7 @@ namespace Games.ViewModels
                         _timer.Stop();
                         break;
                     default:
-                        MessageUtility.ShowMessage("游戏状态异常");
+                        ShowMessage("游戏状态异常");
                         Console.WriteLine(value);
                         return;
                 }
@@ -276,7 +276,7 @@ namespace Games.ViewModels
         {
             if (GlobalData.LoginUser == null)
             {
-                MessageUtility.ShowMessage("登录失效，请重新登录");
+                ShowMessage("登录失效，请重新登录");
                 return;
             }
             var sqlContext = Container.Resolve<PostgreSqlContext>();
@@ -295,7 +295,7 @@ namespace Games.ViewModels
             };
             sqlContext.Rank.Add(rank);
             sqlContext.SaveChangesAsync();
-            MessageUtility.ShowMessage("上传成功!");
+            ShowMessage("上传成功!");
             GameStatus = Constants.GameStatus.Init;
         }
 

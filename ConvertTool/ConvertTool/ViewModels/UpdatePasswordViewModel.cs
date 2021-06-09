@@ -87,7 +87,7 @@ namespace ConvertTool.ViewModels
         {
             if (Password != CheckPassword || string.IsNullOrEmpty(Password))
             {
-                MessageUtility.ShowMessage("两次密码不一致！");
+                ParentViewModel.ShowMessage("两次密码不一致！");
                 return;
             }
 
@@ -114,13 +114,13 @@ namespace ConvertTool.ViewModels
                 }
                 else
                 {
-                    MessageUtility.ShowMessage("验证码输入错误！");
+                    ParentViewModel.ShowMessage("验证码输入错误！");
                     return;
                 }
             }
             else
             {
-                MessageUtility.ShowMessage("手机号输入错误或未注册！");
+                ParentViewModel.ShowMessage("手机号输入错误或未注册！");
                 return;
             }
         }

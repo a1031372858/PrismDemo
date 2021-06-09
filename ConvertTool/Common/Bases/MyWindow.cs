@@ -36,16 +36,39 @@ namespace Common.Bases
             }
             if (GetTemplateChild("BlackMessageBox") is Thumb blackMessageBox)
             {
+                blackMessageBox.Loaded += BlackMessageBox_Loaded;
                 blackMessageBox.DragDelta += BlackMessageBox_OnDragDelta;
             }
             
         }
 
+        private void BlackMessageBox_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            if (sender is Thumb thumb && thumb.Parent is Canvas canvas)
+            {
+                var leftLength = (canvas.ActualWidth - thumb.MinWidth) / 2;
+                var topLength = canvas.ActualHeight  / 6;
+                Canvas.SetLeft(thumb, leftLength);
+                Canvas.SetTop(thumb, topLength);
+            }
+        }
+
+        /// <summary>
+        /// 提示框关闭
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
+        /// <summary>
+        /// 提示框移动
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BlackMessageBox_OnDragDelta(object sender, DragDeltaEventArgs e)
         {
             if (sender is Thumb thumb && thumb.Parent is Canvas canvas)
@@ -76,12 +99,21 @@ namespace Common.Bases
         }
 
 
-
+        /// <summary>
+        /// 窗口最小化
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MinButton_OnClick(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
         }
 
+        /// <summary>
+        /// 窗口移动
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Header_OnMouseMove(object sender, MouseEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)

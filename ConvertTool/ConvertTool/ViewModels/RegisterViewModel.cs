@@ -76,7 +76,7 @@ namespace ConvertTool.ViewModels
 
                 if (context.UserDetail.Any(o => o.Phone == Phone))
                 {
-                    MessageUtility.ShowMessage("该手机号已注册！");
+                    ParentViewModel.ShowMessage("该手机号已注册！");
                     return;
                 }
 
@@ -107,7 +107,7 @@ namespace ConvertTool.ViewModels
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                MessageUtility.ShowMessage("数据库登录失败！");
+                ParentViewModel.ShowMessage("数据库登录失败！");
             }
         }
 

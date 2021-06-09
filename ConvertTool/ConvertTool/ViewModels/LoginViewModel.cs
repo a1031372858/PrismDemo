@@ -75,7 +75,7 @@ namespace ConvertTool.ViewModels
         private void LoginViewModel_ErrorsChanged(object sender, DataErrorsChangedEventArgs e)
         {
             var msg = ErrorsContainer.GetErrors(e.PropertyName).FirstOrDefault(); 
-            MessageUtility.ShowMessage(msg);
+            ParentViewModel.ShowMessage(msg);
         }
 
         private void Register()

@@ -112,6 +112,7 @@
                             Canvas.Top="0"
                             Width="300"
                             Height="Auto"
+                            MinWidth="300"
                             MinHeight="95"
                             Panel.ZIndex="99"
                             Visibility="{Binding MessageBoxVisibility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
@@ -119,6 +120,10 @@
                                 <ControlTemplate>
                                     <Border
                                         x:Name="Border"
+                                        Width="{TemplateBinding Width}"
+                                        Height="{TemplateBinding Height}"
+                                        MinWidth="{TemplateBinding MinWidth}"
+                                        MinHeight="{TemplateBinding MinHeight}"
                                         Background="Black"
                                         CornerRadius="5"
                                         Opacity="0.6">
