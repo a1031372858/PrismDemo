@@ -26,9 +26,9 @@ namespace Common.Bases
 
         public IDialogService DialogService { get; }
 
-        protected CompositeDisposable Disposable { get; } = new CompositeDisposable();
-
         public event Action<IDialogResult> RequestClose;
+
+        protected CompositeDisposable Disposable { get; } = new CompositeDisposable();
 
         public bool HasErrors { get; }
 
@@ -80,7 +80,6 @@ namespace Common.Bases
             EventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
             Container = ServiceLocator.Current.GetInstance<IContainerProvider>();
             DialogService = Container.Resolve<IDialogService>();
-            RequestClose += ViewModel_Close;
             RegisterBaseCommands();
             RegisterProperties();
             RegisterCommands();
@@ -99,12 +98,6 @@ namespace Common.Bases
             MessageBoxVisibility = Visibility.Collapsed;
         }
 
-        private void ExitMethod()
-        {
-            OnDialogClosed();
-        }
-
-        protected virtual void ViewModel_Close(IDialogResult obj) { }
 
 
         /// <summary>
@@ -138,15 +131,19 @@ namespace Common.Bases
         }
 
 
+        protected virtual void ExitMethod()
+        {
+            RequestClose?.Invoke(new DialogResult(ButtonResult.OK));
+        }
+
+
         public bool CanCloseDialog()
         {
             return true;
         }
 
-        public void OnDialogClosed()
-        {
-            RequestClose?.Invoke(new DialogResult(ButtonResult.OK));
-        }
+        public void OnDialogClosed() { }
+
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
