@@ -96,7 +96,6 @@ namespace ConvertTool.ViewModels
                         ParentViewModel.ShowMessage("登录成功！");
                         GlobalData.LoginUser = loginUser;
                         DialogService.Show("GamesView");
-                        Container.Resolve<LoginMainView>().Close();
                     }
                     else
                     {
