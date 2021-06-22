@@ -83,18 +83,34 @@ namespace ConvertTool.ViewModels
             ParentViewModel.ViewMode = Constants.LoginViewMode.Register;
         }
 
-        private void Login()
+        private async  void Login()
         {
             if (!string.IsNullOrEmpty(Account) && !string.IsNullOrEmpty(Password))
             {
                 var context = Container.Resolve<PostgreSqlContext>();
+                try
+                {
+                    if (!await context.Database.CanConnectAsync())
+                    {
+                        ParentViewModel.ShowMessage("连接数据库失败");
+                        return;
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    ParentViewModel.ShowMessage("连接数据库失败");
+                    return;
+                }
+                
                 var loginUser = context.UserDetail.FirstOrDefault(o => o.Phone == Account);
                 if (loginUser!=null)
                 {
                     if (loginUser.UserPassword == Password)
                     {
                         ParentViewModel.ShowMessage("登录成功！");
-                        GlobalData.LoginUser = loginUser;
+                        GlobalData.LoginUserInfo.UserDetail = loginUser;
                         DialogService.Show("GamesView");
                     }
                     else

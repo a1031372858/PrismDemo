@@ -14,10 +14,10 @@ namespace SqlData
     {
         private const string Port = "5432";
         private const string DbName = "usermanager";
-         // private const string Host = "localhost";
-        private const string Host = "192.168.1.88";
-        // private const string Password = "666666";
-        private const string Password = "root";
+         private const string Host = "localhost";
+        // private const string Host = "192.168.1.88";
+        private const string Password = "666666";
+        // private const string Password = "root";
         private const string UserId = "postgres";
 
         // private readonly ILoggerFactory _factory;
@@ -26,11 +26,11 @@ namespace SqlData
         // {
         //     _factory = loggerFactory;
         // }
-        private static NpgsqlConnection _connection = new NpgsqlConnection($@"PORT={Port};DATABASE={DbName};HOST={Host};PASSWORD={Password};USER ID={UserId};");
+        private static readonly NpgsqlConnection Connection = new NpgsqlConnection($@"PORT={Port};DATABASE={DbName};HOST={Host};PASSWORD={Password};USER ID={UserId};");
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql(_connection);
+            optionsBuilder.UseNpgsql(Connection);
         }
 
         public DbSet<UserDetail> UserDetail { set; get; }

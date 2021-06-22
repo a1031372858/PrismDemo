@@ -1,16 +1,17 @@
-﻿using SqlData.Beans;
+﻿using Common.Models;
+using SqlData.Beans;
 
 namespace Common.Global
 {
     public class GlobalData
     {
-        private static UserDetail _loginUserDetail;
-        public static UserDetail LoginUser
+        private static UserInfoModel _loginUserInfo;
+        public static UserInfoModel LoginUserInfo
         {
-            set => _loginUserDetail = value;
+            set => _loginUserInfo = value;
             get
             {
-                return _loginUserDetail;
+                return _loginUserInfo;
             }
         }
     }

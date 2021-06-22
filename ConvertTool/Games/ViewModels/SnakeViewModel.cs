@@ -20,9 +20,9 @@ namespace Games.ViewModels
     {
         public readonly DispatcherTimer _timer = new DispatcherTimer();
 
-        private int _maxX = 20;
+        private const int MaxX = 20;
 
-        private int _maxY = 20;
+        private const int MaxY = 20;
         private int _nextGrade;
 
         private int _grade;
@@ -120,10 +120,10 @@ namespace Games.ViewModels
 
         protected override void Init()
         {
-            for (int i = 0; i < _maxY; i++)
+            for (int i = 0; i < MaxY; i++)
             {
                 var row = new ChessboardRowModel();
-                for (int j = 0; j < _maxX; j++)
+                for (int j = 0; j < MaxX; j++)
                 {
                     row.CellList.Add(new ChessboardCellModel());
                 }
@@ -165,8 +165,8 @@ namespace Games.ViewModels
                         break;
                 }
 
-                if (HeaderIndexY < 0 || HeaderIndexY >= _maxY ||
-                    HeaderIndexX < 0 || HeaderIndexX >= _maxX)
+                if (HeaderIndexY < 0 || HeaderIndexY >= MaxY ||
+                    HeaderIndexX < 0 || HeaderIndexX >= MaxX)
                 {
                     _timer.Stop();
                     GameStatus = Constants.GameStatus.End;
@@ -257,14 +257,14 @@ namespace Games.ViewModels
         private void MakeFood()
         {
             var random = new Random();
-            var y = random.Next(0, _maxY);
-            var x = random.Next(0, _maxX);
+            var y = random.Next(0, MaxY);
+            var x = random.Next(0, MaxX);
             Food = ChessboardRowList[y].CellList[x];
 
             while (SnakeList.Any(o => o == Food))
             {
-                y = random.Next(0, _maxY);
-                x = random.Next(0, _maxX);
+                y = random.Next(0, MaxY);
+                x = random.Next(0, MaxX);
                 Food = ChessboardRowList[y].CellList[x];
             }
             Food.CellBackground = "Green";
@@ -274,7 +274,7 @@ namespace Games.ViewModels
 
         private void Upload()
         {
-            if (GlobalData.LoginUser == null)
+            if (GlobalData.LoginUserInfo == null)
             {
                 ShowMessage("登录失效，请重新登录");
                 return;
@@ -290,7 +290,7 @@ namespace Games.ViewModels
             {
                 RankId = ++rankId,
                 Grade = Grade,
-                UserId = GlobalData.LoginUser.UserId,
+                UserId = GlobalData.LoginUserInfo.UserDetail.UserId,
                 GameId = 1,
             };
             sqlContext.Rank.Add(rank);

@@ -58,6 +58,19 @@ namespace ConvertTool
                 return null;
             }
 
+            try
+            {
+                if (!Container.Resolve<PostgreSqlContext>().Database.CanConnect())
+                {
+                    MessageUtility.ShowMessage("服务器连接失败。");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+            RedisUtility.LoadInitData();
             return Container.Resolve<LoginMainView>();
         }
 

@@ -89,7 +89,7 @@
                 ItemsSource="{Binding ChessboardRowList}"
                 SnapsToDevicePixels="False" />
         </Border>
-        <WrapPanel Grid.Row="2">
+        <WrapPanel Grid.Row="2" Margin="0,20,0,0">
             <Button
                 Width="100"
                 Height="30"

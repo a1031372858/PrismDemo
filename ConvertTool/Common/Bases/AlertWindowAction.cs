@@ -27,14 +27,14 @@ namespace Common.Bases
             var windows = this.GetChildWindow(arg.Context);
 
             var callback = arg.Callback;
-            EventHandler handler = null;
-            handler =
-                (o, e) =>
-                {
-                    windows.Closed -= handler;
-                    callback();
-                };
-            windows.Closed += handler;
+
+            void Handler(object o, EventArgs e)
+            {
+                windows.Closed -= Handler;
+                callback();
+            }
+
+            windows.Closed += Handler;
         }
         Window GetChildWindow(INotification notification)
         {
