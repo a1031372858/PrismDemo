@@ -13,6 +13,7 @@ using Prism.Commands;
 using Prism.Ioc;
 using Prism.Services.Dialogs;
 using SqlData;
+using SqlData.Beans;
 
 namespace ConvertTool.ViewModels
 {
@@ -35,11 +36,11 @@ namespace ConvertTool.ViewModels
                 SetProperty(ref _account, value);
                 if (string.IsNullOrEmpty(_account))
                 {
-                    ErrorsContainer.SetErrors(()=>Account,new string[]{ "用户名不能为空" });
+                    ErrorsContainer.SetErrors(() => Account, new string[] { "用户名不能为空" });
                 }
                 else
                 {
-                    ErrorsContainer.ClearErrors(()=>Account);
+                    ErrorsContainer.ClearErrors(() => Account);
                 }
             }
             get => _account;
@@ -74,7 +75,7 @@ namespace ConvertTool.ViewModels
 
         private void LoginViewModel_ErrorsChanged(object sender, DataErrorsChangedEventArgs e)
         {
-            var msg = ErrorsContainer.GetErrors(e.PropertyName).FirstOrDefault(); 
+            var msg = ErrorsContainer.GetErrors(e.PropertyName).FirstOrDefault();
             ParentViewModel.ShowMessage(msg);
         }
 
@@ -83,29 +84,17 @@ namespace ConvertTool.ViewModels
             ParentViewModel.ViewMode = Constants.LoginViewMode.Register;
         }
 
-        private async  void Login()
+        private void Login()
         {
             if (!string.IsNullOrEmpty(Account) && !string.IsNullOrEmpty(Password))
             {
-                var context = Container.Resolve<PostgreSqlContext>();
-                try
+                if (!RedisUtility.Client.IsSocketConnected())
                 {
-                    if (!await context.Database.CanConnectAsync())
-                    {
-                        ParentViewModel.ShowMessage("连接数据库失败");
-                        return;
-                    }
-
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    ParentViewModel.ShowMessage("连接数据库失败");
                     return;
                 }
-                
-                var loginUser = context.UserDetail.FirstOrDefault(o => o.Phone == Account);
-                if (loginUser!=null)
+                    
+                var loginUser = RedisUtility.Client.Get<UserDetail>(Account);
+                if (loginUser != null)
                 {
                     if (loginUser.UserPassword == Password)
                     {
@@ -122,26 +111,55 @@ namespace ConvertTool.ViewModels
                 {
                     ParentViewModel.ShowMessage("该用户不存在！");
                 }
-                
-
-                // string sql = string.Format("select * from \"user\" where phone= '{0}' and \"password\"='{1}'", Account, Password);
-
-                // var result=SQLUtility.SqlExecute(sql);
-                // if (result!=null&&result.HasRows&& result.Read())
-                // {
-                //     var name = result["username"];
-                //     var id =result.GetData(1);
-                // }
-                // var loginView = Container.Resolve(typeof(ToolView));
-                // if (loginView is ToolView view)
-                // {
-                //     view.Close();
-                // }
-            }
+            } 
             else
             {
                 ParentViewModel.ShowMessage("用户名或密码不能为空！");
             }
+
+
+            // if (!string.IsNullOrEmpty(Account) && !string.IsNullOrEmpty(Password))
+            // {
+            //     var context = Container.Resolve<PostgreSqlContext>();
+            //     try
+            //     {
+            //         if (!await context.Database.CanConnectAsync())
+            //         {
+            //             ParentViewModel.ShowMessage("连接数据库失败");
+            //             return;
+            //         }
+            //
+            //     }
+            //     catch (Exception e)
+            //     {
+            //         Console.WriteLine(e);
+            //         ParentViewModel.ShowMessage("连接数据库失败");
+            //         return;
+            //     }
+            //
+            //     var loginUser = context.UserDetail.FirstOrDefault(o => o.Phone == Account);
+            //     if (loginUser != null)
+            //     {
+            //         if (loginUser.UserPassword == Password)
+            //         {
+            //             ParentViewModel.ShowMessage("登录成功！");
+            //             GlobalData.LoginUserInfo.UserDetail = loginUser;
+            //             DialogService.Show("GamesView");
+            //         }
+            //         else
+            //         {
+            //             ParentViewModel.ShowMessage("用户名或密码错误！");
+            //         }
+            //     }
+            //     else
+            //     {
+            //         ParentViewModel.ShowMessage("该用户不存在！");
+            //     }
+            // }
+            // else
+            // {
+            //     ParentViewModel.ShowMessage("用户名或密码不能为空！");
+            // }
         }
         private void UpdatePassword()
         {

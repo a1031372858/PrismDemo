@@ -67,10 +67,21 @@ namespace ConvertTool
             }
             catch (Exception e)
             {
+                MessageUtility.ShowMessage("服务器连接失败。");
                 Console.WriteLine(e);
                 return null;
             }
-            RedisUtility.LoadInitData();
+
+            try
+            {
+                RedisUtility.LoadInitData();
+            }
+            catch (Exception e)
+            {
+                MessageUtility.ShowMessage("Redis连接失败。");
+                Console.WriteLine(e);
+                return null;
+            }
             return Container.Resolve<LoginMainView>();
         }
 
