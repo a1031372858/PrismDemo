@@ -12,25 +12,25 @@ namespace Games.Model
             set => SetProperty(ref _viewNum, value);
             get => _viewNum;
         }
-        private int _userId;
+        private long _userId;
 
-        public int UserId
+        public long UserId
         {
             set => SetProperty(ref _userId, value);
             get => _userId;
         }
 
-        private int _gameId;
+        private long _gameId;
 
-        public int GameId
+        public long GameId
         {
             set => SetProperty(ref _gameId, value);
             get => _gameId;
         }
 
-        private int _rankId;
+        private long _rankId;
 
-        public int RankId
+        public long RankId
         {
             set => SetProperty(ref _rankId, value);
             get => _rankId;

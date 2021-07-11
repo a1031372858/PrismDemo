@@ -80,7 +80,7 @@ namespace ConvertTool.ViewModels
                     return;
                 }
 
-                var newUserId = 0;
+                var newUserId = 0L;
                 if (context.UserDetail.Any())
                 {
                     newUserId = context.UserDetail.Max(o => o.UserId);

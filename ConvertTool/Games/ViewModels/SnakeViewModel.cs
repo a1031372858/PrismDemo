@@ -281,7 +281,7 @@ namespace Games.ViewModels
             }
             var sqlContext = Container.Resolve<PostgreSqlContext>();
 
-            var rankId = 0;
+            var rankId = 0L;
             if (sqlContext.Rank.Any())
             {
                 rankId = sqlContext.Rank.Max(o => o.RankId);

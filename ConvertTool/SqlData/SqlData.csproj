@@ -166,6 +166,10 @@
     <Compile Include="Migrations\20210607012523_Version0.1.designer.cs">
       <DependentUpon>20210607012523_Version0.1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20210711105920_IdUpdate.cs" />
+    <Compile Include="Migrations\20210711105920_IdUpdate.designer.cs">
+      <DependentUpon>20210711105920_IdUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\PostgreSqlContextModelSnapshot.cs" />
     <Compile Include="PostgreSqlContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

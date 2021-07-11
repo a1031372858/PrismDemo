@@ -206,6 +206,7 @@
     <Compile Include="Models\UserInfoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegionAdapter\StackPanelRegionAdapter.cs" />
+    <Compile Include="Utility\HttpUtility.cs" />
     <Compile Include="Utility\MessageUtility.cs" />
     <Compile Include="Utility\RedisUtility.cs" />
     <Compile Include="Utility\SqlUtility.cs" />

@@ -9,7 +9,7 @@ namespace SqlData.Beans
     {
         [Key]
         [Column("game_id")]
-        public int GameId { set; get; }
+        public long GameId { set; get; }
 
         [Column("game_name")]
         public string GameName { set; get; }

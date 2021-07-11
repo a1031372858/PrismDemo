@@ -10,13 +10,13 @@ namespace SqlData.Beans
 
         [Key]
         [Column("rank_id")]
-        public int RankId { set; get; }
+        public long RankId { set; get; }
 
         [Column("user_id")]
-        public int UserId { set; get; }
+        public long UserId { set; get; }
 
         [Column("game_id")]
-        public int GameId { set; get; }
+        public long GameId { set; get; }
 
         [Column("grade")]
         public int Grade { set; get; }
