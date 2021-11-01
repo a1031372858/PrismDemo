@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Documents;
 
 namespace Common.Enums
@@ -37,7 +38,7 @@ namespace Common.Enums
         private static TAttribute GetAttribute<TAttribute>(this Enum value)
         {
             var enumType = value.GetType();
-            var attributes = enumType.GetCustomAttributes(typeof(TAttribute), false)
+            var attributes = enumType.GetCustomAttributes(typeof(TAttribute))
                 .Cast<TAttribute>().ToList();
             return attributes.FirstOrDefault();
         }

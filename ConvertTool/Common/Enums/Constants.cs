@@ -36,5 +36,11 @@ namespace Common.Enums
             Left,
             Right
         }
+
+        public enum RequestMethod
+        {
+            GET,
+            POST,
+        }
     }
 }

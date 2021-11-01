@@ -110,6 +110,9 @@
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.19\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Npgsql, Version=4.1.8.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
       <HintPath>..\packages\Npgsql.4.1.8\lib\net461\Npgsql.dll</HintPath>
     </Reference>
@@ -278,6 +281,10 @@
     <ProjectReference Include="..\Games\Games.csproj">
       <Project>{5B8D2A62-1242-4E62-8F79-C256DC300CEE}</Project>
       <Name>Games</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Service\Service.csproj">
+      <Project>{BC5E3F36-C710-4ED8-8411-171CBAE1F585}</Project>
+      <Name>Service</Name>
     </ProjectReference>
     <ProjectReference Include="..\SqlData\SqlData.csproj">
       <Project>{69ab841e-0ad6-4eb7-91cd-b079e1ea061c}</Project>

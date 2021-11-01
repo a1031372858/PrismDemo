@@ -201,6 +201,7 @@
     <Compile Include="Convertor\BoolToVisibilityConvertor.cs" />
     <Compile Include="Enums\Constants.cs" />
     <Compile Include="Enums\EnumExtension.cs" />
+    <Compile Include="Enums\ResponseStatus.cs" />
     <Compile Include="Events\MessageEvent.cs" />
     <Compile Include="Global\GlobalData.cs" />
     <Compile Include="Models\UserInfoModel.cs" />
@@ -217,6 +218,7 @@
     <Compile Include="Views\MessageView.xaml.cs">
       <DependentUpon>MessageView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WebDto\ResponseWebDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

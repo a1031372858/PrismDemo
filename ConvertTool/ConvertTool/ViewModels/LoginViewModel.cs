@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows;
 using Common.Bases;
 using Common.Enums;
 using Common.Global;
@@ -9,9 +8,11 @@ using Common.Utility;
 using Common.Views;
 using ConvertTool.Views;
 using Games.Views;
+using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Ioc;
 using Prism.Services.Dialogs;
+using Service;
 using SqlData;
 using SqlData.Beans;
 
@@ -28,7 +29,7 @@ namespace ConvertTool.ViewModels
             ParentViewModel = parentViewModel;
         }
 
-        private string _account = string.Empty;
+        private string _account = "15797704512";
         public string Account
         {
             set
@@ -46,7 +47,7 @@ namespace ConvertTool.ViewModels
             get => _account;
         }
 
-        private string _password = string.Empty;
+        private string _password = "123456";
         public string Password
         {
             set => SetProperty(ref _password, value);
@@ -84,7 +85,7 @@ namespace ConvertTool.ViewModels
             ParentViewModel.ViewMode = Constants.LoginViewMode.Register;
         }
 
-        private void Login()
+        private async void Login()
         {
             if (!string.IsNullOrEmpty(Account) && !string.IsNullOrEmpty(Password))
             {
@@ -92,8 +93,9 @@ namespace ConvertTool.ViewModels
                 {
                     return;
                 }
-                    
-                var loginUser = RedisUtility.Client.Get<UserDetail>(Account);
+
+                var loginUser = await new UserInfoService().SelectUserInfo(Account,Password);
+                // var loginUser = RedisUtility.Client.Get<UserDetail>(Account);
                 if (loginUser != null)
                 {
                     if (loginUser.UserPassword == Password)
